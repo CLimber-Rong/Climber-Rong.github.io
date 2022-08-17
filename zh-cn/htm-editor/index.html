@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>HTML在线模拟器</title>
         <!-- 新 Bootstrap5 核心 CSS 文件 -->
         <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css">
         <!--  popper.min.js 用于弹窗、提示、下拉菜单 -->
@@ -18,4 +19,56 @@
         <!-- modernizr.js 文件 -->
         <script src="http://cdn.static.runoob.com/libs/foundation/5.5.3/js/vendor/modernizr.js"></script>
     </head>
+    <script>
+        $(document).ready(function(){
+            $(document).foundation();
+        })
+        function RunHTML(){
+
+        }
+    </script>
+    <style>
+        .header{
+            text-align: center;
+            background-color: darkgray;
+            width: 100%;
+            height: 10;
+        }
+        .codeline{
+            background-color: white;
+            resize: none;
+            float: inline-end;
+            width: 40%;
+            height: 82%;
+            top: 82;
+        }
+        .runbttn{
+            text-align: center;
+            width: 10%;
+            height: 8%;
+        }
+        .htmview{
+            float: right;
+            width: 60%;
+            height: 90%;
+        }
+        .mypanel{
+            height: 90%;
+        }
+        /* 响应式布局 - 小于 600 px 时改为上下布局 */
+        @media screen and (max-width: 600px) {
+            .column {
+                width: 100%;
+            }
+        }
+    </style>
+    <body>
+        <h3 class="header">在线HTML模拟器</h3>
+        <button type="button" class="button radius runbttn">运行</button>
+        <textarea class="codeline" type="textarea" placeholder="输入你的HTML代码"></textarea>
+        <iframe>
+            &lt;h1&gt;Hello world!&lt;/h1&gt;
+            主要是用来嵌套网页的。所以你要引入另一个页面就用
+        </iframe>
+    </body>
 </html>
