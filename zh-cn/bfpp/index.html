@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <title>BF++帮助文档</title>
+    <!--bootstrap-->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script>
+    <!--font-awesome-->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+    <!--foundation-->
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/foundation/5.5.3/css/foundation.min.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/foundation/5.5.3/js/foundation.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/foundation/5.5.3/js/vendor/modernizr.js"></script>
+</head>
+<style>
+    pre {
+        font-family: 'Courier New', Courier, monospace;
+        font-size: medium;
+    }
+
+    html {
+        filter: progid:DXImageTransform.Microsoft.BasicImage(grayscale=1);
+        -moz-filter: grayscale(100%);
+        -ms-filter: grayscale(100%);
+        -o-filter: grayscale(100%);
+        -webkit-filter: grayscale(100%);
+        filter: grayscale(100%);
+    }
+</style>
+
+<body>
+    <h1>欢迎来到BF++教程</h1>
+    <h2>BF++语言是基于BF语言改进而来，所以要有BF语言的基础</h1>
+        <h2>点击<a href="https://Climber-Rong.github.io/zh-cn/brfk/">这里</a>来看BF教程</h1>
+            <h3>什么是BF++</h3>
+            <p>他是一门由我改进而来的编译性语言，编译方式为JIT，即将代码翻译为BF语言格式然后执行</p>
+            <h3>好的，既然已经有了基础，那么开门见山，直接看看改进后的架构！</h3>
+            <h5>事实上，BF++并没有增加新功能，而是对BF的语法进行了易读化处理和快捷化处理</h5>
+            <h5>用以下表格介绍：</h5>
+            <div class="container mt-3">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>命令</th>
+                            <th>命令作用</th>
+                            <th>示例</th>
+                            <th>示例的作用</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>ADD [x]</td>
+                            <td>让指针对应字节加上x</td>
+                            <td>add 10</td>
+                            <td>让指针对应字节加上10</td>
+                        </tr>
+                        <tr>
+                            <td>SUB [x]</td>
+                            <td>让指针对应字减上x</td>
+                            <td>SUB 10</td>
+                            <td>让指针对应字节减去10</td>
+                        </tr>
+                        <tr>
+                            <td>LST [x]</td>
+                            <td>指针左移x位</td>
+                            <td>LST 10</td>
+                            <td>让指针左移10位</td>
+                        </tr>
+                        <tr>
+                            <td>RST [x]</td>
+                            <td>指针右移x位</td>
+                            <td>LST 10</td>
+                            <td>让指针右移10位</td>
+                        </tr>
+                        <tr>
+                            <td>IN</td>
+                            <td>读取一个字符到指针对应字节，没有参数</td>
+                            <td>IN</td>
+                            <td>读取一个字符到指针对应字节</td>
+                        </tr>
+                        <tr>
+                            <td>OUT</td>
+                            <td>输出指针对应字节，没有参数</td>
+                            <td>OUT</td>
+                            <td>输出指针对应字节</td>
+                        </tr>
+                        <tr>
+                            <td>LOOP</td>
+                            <td>只要指针对应字节不等于0，就一直循环LOOP~END之间的内容（直到指针对应字节等于0），允许循环嵌套，没有参数</td>
+                            <td>无</td>
+                            <td>无</td>
+                        </tr>
+                        <tr>
+                            <td>END</td>
+                            <td>配合上述的"LOOP"指令</td>
+                            <td>无</td>
+                            <td>无</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>指令支持大小写，比如add指令和ADD指令，对编译器来说都是一样的，但是aDd这样的指令却是不允许的</p>
+            <p>这也就意味着指令支持大小写，但是书写风格必须统一</p>
+            <p>笔者喜欢大写风格，所以本教程的代码风格都是大写</p>
+            <p>这里顺带一提，BF++语法终于支持单独一行的注释啦，如果用 ";" 开头，那么编译器会当作注释忽略，但注意不是中文的“；”</p>
+            <h5>代码示例</h5>
+            <p>这里还是举BF教程当中输出Hello world和一位数加法的示例</p>
+            <p>老样子，输出Hello world!，得先输出H</p>
+            <div class="panel">
+                <pre>
+;输出H字母
+ADD 72
+OUT
+</pre>
+            </div>
+            <p>是的，很简单，所以接下来Hello world的代码就变成了</p>
+            <div class="panel">
+                <pre>
+;输出Hello world!
+;先一个一个加
+ADD 72
+RST 1
+ADD 101
+LST 1
+ADD 108
+RST 1
+ADD 108
+RST 1
+ADD 111
+RST 1
+ADD 32
+RST 1
+ADD 119
+RST 1
+ADD 111
+RST 1
+ADD 114
+RST 1
+ADD 108
+RST 1
+ADD 100
+RST 1
+ADD 33
+;加完了，就回到起点，然后不断输出，直到字节为空，类似puts()
+LST 12
+;回到起点
+LOOP
+OUT
+RST 1
+END
+</pre>
+            </div>
+            <p>接下来是一位数相加</p>
+            <div class="panel">
+                <pre>
+IN
+;输入第一个数
+SUB 48
+;ASCII转数字
+RST 1
+;轮到下一字节
+IN
+IN
+;输入两次是因为中间还有个加号要省略
+SUB 48
+;同样转数字
+LOOP
+;进行相加
+LST 1
+ADD 1
+RST 1
+SUB 1
+END
+;现在数字转ASCII
+ADD 48
+OUT
+</pre>
+            </div>
+            <h5>命令集</h5>
+            <h5>报错解决方案</h5>
+            <br>
+            <br>
+            <br>
+</body>
+
+</html>
