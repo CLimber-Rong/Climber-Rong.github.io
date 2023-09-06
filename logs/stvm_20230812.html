@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+    <meta charset="utf-8" />
+    <title></title>
+
+    <!-- 新 Bootstrap4 核心 CSS 文件 -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- bootstrap.bundle.min.js 用于弹窗、提示、下拉菜单，包含了 popper.min.js -->
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+
+    <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-sm bg-light justify-content-center">
+      <a class="navbar-brand" href="#">
+        <img src="https://CLimber-Rong.github.io/image/icon.png" alt="logo" style="width: 40px" />
+      </a>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="https://CLimber-Rong.github.io/index.html">首页</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://CLimber-Rong.github.io/about.html">关于</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://CLimber-Rong.github.io/doc.html">文档</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://CLimber-Rong.github.io/project.html">项目</a>
+        </li>
+      </ul>
+    </nav>
+    <br>
+
+<h1 id="2023-08-12-">2023/08/12 工作日志</h1>
+<p>本次的提交内容很多，架构的改动也很大。让我们来依次介绍。<br></p>
+<h3 id="1-vscode-">1. 改用VSCode开发</h3>
+<p>这个项目一直以来都是使用dev-c++开发，现在我正式改用vscode开发，效率更高。<br><br>
+不用担心，这个项目可以在没有VSCode的情况下编译运行。</p>
+<h3 id="2-ast-">2. AST设计</h3>
+<p>我优化了Ast节点的设计，成功的把33个节点整合到了24个节点。</p>
+<h3 id="3-">3. 依赖库架构</h3>
+<p>在以前，我提供了依赖库的模板（以下简称库模板）和基于标准库的依赖库（以下简称标准库）实现方法。<br><br>
+但是，每当添加库函数的时候，我需要同时在库模板和标准库添加函数，来保证两者之间的同步，这很麻烦，有的时候也会忘记同步。<br><br>
+所以我做了一个<del>违背祖宗的</del>决定：删除库模板，只保留标准库。<br><br>
+当然，这并不意味着我会放弃“只需要实现依赖库就可以运行STVM”的特性。在项目发布之后，我会根据标准库重新编写库模板，来恢复这一特性。这样，我的项目架构会变得更加精简。</p>
+<h3 id="4-">4. 依赖库是临时的</h3>
+<p>由于虚拟机具有GC功能，代码（包括依赖库）都应该向我的内存管理器申请内存。不过由于内存管理器的开发是比较后面的事，所以现在的代码直接向堆申请。<br><br>
+故此，现在的依赖库是临时的，我们将在后面把依赖库改装成“向内存管理器申请内存的依赖库”。</p>
+<h3 id="5-ast-">5. Ast节点定义的代码全部完工</h3>
+<p>大部分的节点代码来自我的代码生成器（接下来会详细介绍），其他的节点代码都是我手写的。<br><br></p>
+<p>我们先来看一看src/ast目录下每个文件的作用</p>
+<pre><code class="lang-C++">ast
+|-Ast.hpp       //里面声明了Ast节点的基类，以及各个节点的类型，所有的Ast节点都应该继承这个类
+|-LeafAst.cpp   //里面写了例如标识符、字面量等基本节点
+|-SfnAst.cpp    //里面写了SFN（后续开发时会详细阐述）节点的定义
+|-ExprAst.cpp   //与表达式有关的节点定义
+|-CodeLogicAst.cpp  //里面写了如流程控制等与代码逻辑有关的节点
+|-code_generator    //这是一个目录，目录里存放着代码生成器的源码
+</code></pre>
+<p>如果你尝试阅读Ast节点定义的代码，建议按照以下顺序阅读：</p>
+<ol>
+<li>Ast.hpp</li>
+<li>LeafAst.cpp</li>
+<li>SfnAst.cpp</li>
+<li>ExprAst.cpp</li>
+<li>CodeLogic.cpp</li>
+</ol>
+<p>如果你想要直接<strong>引用</strong>所有Ast节点，请直接引用Ast.hpp。<br>
+注意，所有的Ast都存放在stamon::ast这个命名空间里，所以如果你要<strong>使用</strong>Ast节点，可以写以下代码</p>
+<pre><code class="lang-C++">#include&quot;Ast.hpp&quot;   //引用Ast.hpp
+using namespace stamon::ast;    //引用Ast的命名空间
+</code></pre>
+<h3 id="6-ast-">6. 关于Ast代码生成器的原理</h3>
+<p><strong>如果你不想了解项目的开发流程，请不要阅读这节内容，也不需要阅读src/ast/code_generator目录下的源码。</strong></p>
+<p>code_generator的目录如下</p>
+<pre><code class="lang-C++">|-setting.json      //里面描述了每个节点类的具体信息
+|-generator.py      //可以根据setting.json描述的具体信息生成C++代码到code.cpp里
+|-code.cpp          //生成出来的C++代码
+</code></pre>
+<p>代码生成的流程显而易见：<br>
+setting.json（配置件）-&gt;generator.py（生成器）-&gt;code.cpp（生成结果 ）
+<br><br></p>
+<p>注意，生成出来的code.cpp还需要复制粘贴到src/ast目录的源码里。<br><br></p>
+<p>如果你想要尝试着自己生成code.cpp，直接运行generator.py即可，运行它不需要任何额外的参数<br><br></p>
+<p>接下来我们来从里到外的讲一讲setting.json的格式<br><br></p>
+<p>如果你想要声明一个构造函数，应该这么写：</p>
+<pre><code class="lang-json">{
+    &quot;args&quot;: &quot;参数1,参数2,...,参数n&quot;,
+    &quot;code&quot;: &quot;在这里写上构造函数的函数体（不需要用花括号嵌套）&quot;
+}
+</code></pre>
+<p>然而，一个类通常有多个构造函数，如果你想描述一个类的所有构造函数，应该这么写</p>
+<pre><code class="lang-json">&quot;structure&quot;: [
+    {
+        &quot;args&quot;: &quot;参数1,参数2,...,参数n&quot;,
+        &quot;code&quot;: &quot;在这里写上构造函数的函数体（不需要用花括号嵌套）&quot;
+    },
+    {
+        &quot;args&quot;: &quot;参数1,参数2,...,参数n&quot;,
+        &quot;code&quot;: &quot;在这里写上构造函数的函数体（不需要用花括号嵌套）&quot;
+    },
+    ...
+    {
+        &quot;args&quot;: &quot;参数1,参数2,...,参数n&quot;,
+        &quot;code&quot;: &quot;在这里写上构造函数的函数体（不需要用花括号嵌套）&quot;
+    }
+]
+</code></pre>
+<p>是的，用一个列表来存放所有的构造函数<br><br></p>
+<p>当然，一个类不止有构造函数，还有公共成员和私有成员，声明公共成员和私有成员应该这么写：</p>
+<pre><code class="lang-json">&quot;private_members&quot;: &quot;在这里写私有成员的定义，不需要写 “private:” &quot;,
+&quot;public_members&quot;: &quot;在这里写公共成员的定义，不需要写 “public:” &quot;
+</code></pre>
+<p>描述一个节点类的类名，应该这么写：</p>
+<pre><code class="lang-json">&quot;name&quot;: &quot;节点的名字（如Expression、Program），不需要加前缀“Ast” &quot;
+</code></pre>
+<p>至此，我们已经知道怎么声明构造函数、公共成员、私有成员和类名了，我们用一个字典来存放他们：</p>
+<pre><code class="lang-json">{
+    &quot;name&quot;: &quot;节点的名字（如Expression、Program），不需要加前缀“Ast” &quot;,
+    &quot;private_members&quot;: &quot;在这里写私有成员的定义，不需要写 “private:” &quot;,
+    &quot;public_members&quot;: &quot;在这里写公共成员的定义，不需要写 “public:” &quot;,
+    &quot;structure&quot;: [
+        {
+            &quot;args&quot;: &quot;参数1,参数2,...,参数n&quot;,
+            &quot;code&quot;: &quot;在这里写上构造函数的函数体（不需要用花括号嵌套）&quot;
+        },
+        {
+            &quot;args&quot;: &quot;参数1,参数2,...,参数n&quot;,
+            &quot;code&quot;: &quot;在这里写上构造函数的函数体（不需要用花括号嵌套）&quot;
+        },
+        ...
+        {
+            &quot;args&quot;: &quot;参数1,参数2,...,参数n&quot;,
+            &quot;code&quot;: &quot;在这里写上构造函数的函数体（不需要用花括号嵌套）&quot;
+        }
+    ]
+}
+</code></pre>
+<p>现在，我们学会了怎么去声明一个具体的类，但是我们需要声明很多的类，所以我们还要再套一个列表，来存储若干个类。<br><br>
+套了列表的代码看起来是这样的：</p>
+<pre><code class="lang-json">&quot;ast_class&quot;: [
+    {
+        &quot;name&quot;: &quot;节点的名字（如Expression、Program），不需要加前缀“Ast” &quot;,
+        &quot;private_members&quot;: &quot;在这里写私有成员的定义，不需要写 “private:” &quot;,
+        &quot;public_members&quot;: &quot;在这里写公共成员的定义，不需要写 “public:” &quot;,
+        &quot;structure&quot;: [
+            {
+                &quot;args&quot;: &quot;参数1,参数2,...,参数n&quot;,
+                &quot;code&quot;: &quot;在这里写上构造函数的函数体（不需要用花括号嵌套）&quot;
+            },
+            {
+                &quot;args&quot;: &quot;参数1,参数2,...,参数n&quot;,
+                &quot;code&quot;: &quot;在这里写上构造函数的函数体（不需要用花括号嵌套）&quot;
+            },
+            ...
+            {
+                &quot;args&quot;: &quot;参数1,参数2,...,参数n&quot;,
+                &quot;code&quot;: &quot;在这里写上构造函数的函数体（不需要用花括号嵌套）&quot;
+            }
+        ]
+    },
+    ...
+    {
+        &quot;name&quot;: &quot;节点的名字（如Expression、Program），不需要加前缀“Ast” &quot;,
+        &quot;private_members&quot;: &quot;在这里写私有成员的定义，不需要写 “private:” &quot;,
+        &quot;public_members&quot;: &quot;在这里写公共成员的定义，不需要写 “public:” &quot;,
+        &quot;structure&quot;: [
+            {
+                &quot;args&quot;: &quot;参数1,参数2,...,参数n&quot;,
+                &quot;code&quot;: &quot;在这里写上构造函数的函数体（不需要用花括号嵌套）&quot;
+            },
+            {
+                &quot;args&quot;: &quot;参数1,参数2,...,参数n&quot;,
+                &quot;code&quot;: &quot;在这里写上构造函数的函数体（不需要用花括号嵌套）&quot;
+            },
+            ...
+            {
+                &quot;args&quot;: &quot;参数1,参数2,...,参数n&quot;,
+                &quot;code&quot;: &quot;在这里写上构造函数的函数体（不需要用花括号嵌套）&quot;
+            }
+        ]
+    }
+]
+</code></pre>
+<p>我们已经学会了怎么声明若干个节点类，现在我们用一个字典来存放若干个节点类，就大功告成了:</p>
+<pre><code class="lang-json">{
+    &quot;ast_class&quot;: [
+        {
+            &quot;name&quot;: &quot;节点的名字（如Expression、Program），不需要加前缀“Ast” &quot;,
+            &quot;private_members&quot;: &quot;在这里写私有成员的定义，不需要写 “private:” &quot;,
+            &quot;public_members&quot;: &quot;在这里写公共成员的定义，不需要写 “public:” &quot;,
+            &quot;structure&quot;: [
+                {
+                    &quot;args&quot;: &quot;参数1,参数2,...,参数n&quot;,
+                    &quot;code&quot;: &quot;在这里写上构造函数的函数体（不需要用花括号嵌套）&quot;
+                },
+                {
+                    &quot;args&quot;: &quot;参数1,参数2,...,参数n&quot;,
+                    &quot;code&quot;: &quot;在这里写上构造函数的函数体（不需要用花括号嵌套）&quot;
+                },
+                ...
+                {
+                    &quot;args&quot;: &quot;参数1,参数2,...,参数n&quot;,
+                    &quot;code&quot;: &quot;在这里写上构造函数的函数体（不需要用花括号嵌套）&quot;
+                }
+            ]
+        },
+        ...
+        {
+            &quot;name&quot;: &quot;节点的名字（如Expression、Program），不需要加前缀“Ast” &quot;,
+            &quot;private_members&quot;: &quot;在这里写私有成员的定义，不需要写 “private:” &quot;,
+            &quot;public_members&quot;: &quot;在这里写公共成员的定义，不需要写 “public:” &quot;,
+            &quot;structure&quot;: [
+                {
+                    &quot;args&quot;: &quot;参数1,参数2,...,参数n&quot;,
+                    &quot;code&quot;: &quot;在这里写上构造函数的函数体（不需要用花括号嵌套）&quot;
+                },
+                {
+                    &quot;args&quot;: &quot;参数1,参数2,...,参数n&quot;,
+                    &quot;code&quot;: &quot;在这里写上构造函数的函数体（不需要用花括号嵌套）&quot;
+                },
+                ...
+                {
+                    &quot;args&quot;: &quot;参数1,参数2,...,参数n&quot;,
+                    &quot;code&quot;: &quot;在这里写上构造函数的函数体（不需要用花括号嵌套）&quot;
+                }
+            ]
+        }
+    ]
+}
+</code></pre>
+<p>这就是描述若干个节点类的格式，从构造函数的声明开始一步一步看下来，也不会太复杂。</p>
+<h3 id="7-">7. 接下来要做的事</h3>
+<ol>
+<li>完成STVM数据类型的定义</li>
+<li>完成STVM内部数据结构的部分定义</li>
+</ol>
+<h3 id="-">后记</h3>
+<p>今天早上代码终于写完了，代码格式化、工作日志等等折腾完之后已经下午了 <del>（我真爱死VSCode了）</del> ，在准备git commit的时候突然发现数字字面量的节点类好像有瑕疵，还好抢救过来了。<br><br>
+希望不要提交之后发现代码有瑕疵。</p>
+  </body>
+</html>
