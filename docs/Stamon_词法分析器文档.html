@@ -1,0 +1,78 @@
+<!--
+ * @Name: 
+ * @Copyright: 
+ * @Author: 
+ * @Date: 06/09/23 17:54
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html>
+    <meta charset="utf-8" />
+    <title></title>
+
+    <!-- 新 Bootstrap4 核心 CSS 文件 -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- bootstrap.bundle.min.js 用于弹窗、提示、下拉菜单，包含了 popper.min.js -->
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+
+    <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-sm bg-light justify-content-center">
+      <a class="navbar-brand" href="#">
+        <img src="https://CLimber-Rong.github.io/image/icon.png" alt="logo" style="width: 40px" />
+      </a>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="https://CLimber-Rong.github.io/index.html">首页</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://CLimber-Rong.github.io/about.html">关于</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://CLimber-Rong.github.io/doc.html">文档</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://CLimber-Rong.github.io/project.html">项目</a>
+        </li>
+      </ul>
+    </nav>
+    <br>
+    <h1 id="-">词法分析器文档</h1>
+    <p>词法分析器的源码位于<code>src/compiler/Lexer.cpp</code>。</p>
+    <p><code>Lexer.cpp</code>里的代码都被<code>stamon::c</code>（<code>c</code>指的是compiler）这个命名空间封装了起来。</p>
+    <p>如果你想要调用<code>Lexer.cpp</code>，可以编写以下代码：</p>
+    <pre><code class="lang-C++">#include&quot;Lexer.cpp&quot;
+    using namespace stamon::c;
+    </code></pre>
+    <p><strong>接下来我想讲一讲词法分析器的架构（了解该架构前，你应该要会编译原理）：</strong></p>
+    <p><code>Token</code>是基本词法单元类，其成员如下：</p>
+    <ul>
+    <li><code>Token(int line, int tok_type)</code>：构造函数，line参数表示该token所在的行号，tok_type表示该token的类型编号（具体请参见<code>Lexer.cpp</code>中的<code>TOKEN_TYPE</code>）</li>
+    <li><code>lineNo</code>：这是一个整数变量，表示该token所在的行号</li>
+    <li><code>type</code>：返回一个整数，即该token的类型编号</li>
+    </ul>
+    <p><br></p>
+    <p>除<code>Token</code>类外，还有<code>StringToken</code>、<code>IdenToken</code>、<code>IntToken</code>、<code>DoubleToken</code>。这些都是<code>Token</code>的子类，如果一个Token是字面量或者标识符，你需要将其转化成对应的子类才能获取信息。具体请参见<code>Lexer.cpp</code>中的相关定义。</p>
+    <p><br></p>
+    <p><code>Lexer</code>是词法分析器类，其接口如下：</p>
+    <ul>
+    <li><code>int getLineTok(int line, String text)</code>：分析一行的token，line是行号，text是文本（不包含换行符）。分析后的token会加入到缓存中。返回解析到的位置，如果返回值是text的长度就说明解析到末尾，即解析成功；否则说明解析失败。</li>
+    <li><code>Token* getTok()</code>：从缓存中读取出（并删除）一个Token。</li>
+    <li><code>Token* peek(int index)</code>：查看第index个Token（但不删除）。</li>
+    </ul>
+    <p>Lexer在分析前，应当先把源码分解成逐行的文本，然后从第一行到最后一行依次调用getLineTok。</p>
+    <p>具体的用法请参见<code>Lexer.cpp</code>和测试样例</p>
+    <blockquote>
+    <p>——摘自<code>工作日志20230131.md</code></p>
+    </blockquote>
+  </body>
+</html>

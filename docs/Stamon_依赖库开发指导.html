@@ -1,0 +1,57 @@
+<!--
+ * @Name: 
+ * @Copyright: 
+ * @Author: 
+ * @Date: 06/09/23 17:54
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html>
+    <meta charset="utf-8" />
+    <title></title>
+
+    <!-- 新 Bootstrap4 核心 CSS 文件 -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- bootstrap.bundle.min.js 用于弹窗、提示、下拉菜单，包含了 popper.min.js -->
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+
+    <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-sm bg-light justify-content-center">
+      <a class="navbar-brand" href="#">
+        <img src="https://CLimber-Rong.github.io/image/icon.png" alt="logo" style="width: 40px" />
+      </a>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="https://CLimber-Rong.github.io/index.html">首页</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://CLimber-Rong.github.io/about.html">关于</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://CLimber-Rong.github.io/doc.html">文档</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://CLimber-Rong.github.io/project.html">项目</a>
+        </li>
+      </ul>
+    </nav>
+    <br>
+    <h1 id="-">依赖库开发指导</h1>
+    <p>依赖库位于<code>src/include</code>中，其中的<code>template</code>目录是依赖库的模板（即接口定义），如果你想要移植Stamon，只需要实现<code>template</code>目录中定义的接口即可。</p>
+    <p>为了示范，我将接口用C语言的标准库实现了一遍，并把代码放到<code>stdc_implemented</code>中。</p>
+    <p>如果你所在的平台支持C语言的标准库（具体标准为C89），那么可以直接使用<code>stdc_implemented</code>作为依赖库。</p>
+    <blockquote>
+    <p>——摘自<code>工作日志20230131.md</code></p>
+    </blockquote>
+  </body>
+</html>

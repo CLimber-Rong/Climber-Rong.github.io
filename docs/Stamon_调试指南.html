@@ -1,0 +1,70 @@
+<!--
+ * @Name: 
+ * @Copyright: 
+ * @Author: 
+ * @Date: 06/09/23 17:54
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html>
+    <meta charset="utf-8" />
+    <title></title>
+
+    <!-- 新 Bootstrap4 核心 CSS 文件 -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- bootstrap.bundle.min.js 用于弹窗、提示、下拉菜单，包含了 popper.min.js -->
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+
+    <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-sm bg-light justify-content-center">
+      <a class="navbar-brand" href="#">
+        <img src="https://CLimber-Rong.github.io/image/icon.png" alt="logo" style="width: 40px" />
+      </a>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="https://CLimber-Rong.github.io/index.html">首页</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://CLimber-Rong.github.io/about.html">关于</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://CLimber-Rong.github.io/doc.html">文档</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://CLimber-Rong.github.io/project.html">项目</a>
+        </li>
+      </ul>
+    </nav>
+    <br>
+    <h1 id="-">调试指南</h1>
+    <p>无论是调试你自己编写的测试代码，抑或是调试测试样例，都至少需要配置好以下工具：</p>
+    <ul>
+    <li>make（参考版本：GNU Make 3.82.90）</li>
+    <li>gcc（参考版本：<code>gcc (x86_64-posix-seh-rev1, Built by MinGW-Builds project) 13.1.0</code>或<code>TDM-GCC 10</code>等）</li>
+    <li><strong>[可选]</strong> strip（参考版本：GNU strip (GNU Binutils) 2.39）</li>
+    <li><strong>[可选]</strong> upx（参考版本：upx 4.0.2）</li>
+    </ul>
+    <p><strong>注意：该项目的Makefile是基于win32的，如果你想要移植该项目到别的系统，请尝试修改Makefile。</strong></p>
+    <p><strong>编译该项目时默认依赖库采用<code>stdc_implemented</code>，如果你所在的平台不支持C标准库，请自行实现依赖库（详见<code>依赖库开发指导.md</code>）。</strong></p>
+    <h5 id="-">调试：</h5>
+    <p>你可以在命令行中键入以下指令：</p>
+    <ul>
+    <li><code>make build</code>：编译项目，生成一个<code>test.exe</code>，即项目可执行文件</li>
+    <li><code>make run</code>：运行项目</li>
+    <li><code>make zip</code>：将项目可执行文件进行压缩 <strong>（该指令需要用到strip和upx）</strong></li>
+    </ul>
+    <blockquote>
+    <p>——摘自<code>工作日志20230131.md</code></p>
+    </blockquote>
+  </body>
+</html>
