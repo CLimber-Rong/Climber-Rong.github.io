@@ -38,11 +38,24 @@
         </li>
         </ul>
     </nav>
-    <br><h1>依赖库开发指导</h1>
-<p>依赖库位于<code>src/include</code>中，其中的<code>template</code>目录是依赖库的模板（即接口定义），如果你想要移植Stamon，只需要实现<code>template</code>目录中定义的接口即可。</p>
-<p>为了示范，我将接口用C语言的标准库实现了一遍，并把代码放到<code>stdc_implemented</code>中。</p>
-<p>如果你所在的平台支持C语言的标准库（具体标准为C89），那么可以直接使用<code>stdc_implemented</code>作为依赖库。</p>
-<blockquote>
-<p>——摘自<code>工作日志20230131.md</code></p>
-</blockquote>  </body>
+    <br><!--
+ * @Name: 
+ * @Copyright: 
+ * @Author: 
+ * @Date: 19/05/24 14:49
+ * @Description: 
+-->
+<h1>2024/05/19 工作日志</h1>
+<p>这是一个小更新。</p>
+<h3>修复了漏洞</h3>
+<p>重构了<code>LineReader</code>类，并且补充了<code>String</code>类的<code>substring</code>方法。
+确保了Stamon能够在其他平台上运行。</p>
+<h3>更新了路径搜索功能</h3>
+<p>以前的环境变量所存储的路径末尾不能有分隔符，但是现在可以了。</p>
+<h3>封装了版本号</h3>
+<p>我将他们封装成了宏，他们是<code>STAMON_VER_X</code>，<code>STAMON_VER_Y</code>，<code>STAMON_VER_Z</code>。
+这样以后更新版本号只需修改这些宏即可。</p>
+<h3>推送了发行版</h3>
+<p>~~当前版本2.2.9。~~
+截至22时09分，当前版本2.2.10。</p>  </body>
     </html>

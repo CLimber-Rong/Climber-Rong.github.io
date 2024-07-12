@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+    <html>
+    <meta charset="utf-8" />
+    <title></title>
+
+    <!-- 新 Bootstrap4 核心 CSS 文件 -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- bootstrap.bundle.min.js 用于弹窗、提示、下拉菜单，包含了 popper.min.js -->
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+
+    <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    </head>
+
+    <body>
+    <nav class="navbar navbar-expand-sm bg-light justify-content-center">
+        <a class="navbar-brand" href="#">
+        <img src="https://CLimber-Rong.github.io/image/icon.png" alt="logo" style="width: 40px" />
+        </a>
+        <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="https://CLimber-Rong.github.io/index.html">首页</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="https://CLimber-Rong.github.io/about.html">关于</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="https://CLimber-Rong.github.io/doc.html">文档</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="https://CLimber-Rong.github.io/project.html">项目</a>
+        </li>
+        </ul>
+    </nav>
+    <br><!--
+ * @Name: 
+ * @Copyright: 
+ * @Author: 
+ * @Date: 16/06/24 19:58
+ * @Description: 
+-->
+<h1>2024/06/16 工作日志</h1>
+<p>本次发行了2.4.4版本。</p>
+<h3>修复了一些漏洞</h3>
+<p>目前已无已知Bug。</p>
+<p>主要修复了编译器和Stamon标准库的bug。</p>
+<h3>成功支持Linux</h3>
+<p>成功将程序移植到Linux系统（测试环境：Debian），并且发布了发行版。</p>
+<h3>新增了Strip功能</h3>
+<p>你可以利用Stamon的<code>strip</code>选项剥夺字节码（即<code>.stvc</code>文件）的调试信息，来减少字节码文件大小，提升编译和运行的速度。代价就是在调试过程中无法知道错误所在位置，<strong>该功能一般用于编译发行版的字节码</strong>。</p>
+<p>该功能同样内嵌与<code>build</code>选项，在该选项中加入<code>--strip=true</code>参数即可指定编译时不写入调试信息。用<code>--strip=false</code>则写入调试信息（如果不加入该参数则默认写入调试信息）</p>
+<h3>编译发行版</h3>
+<p>目前支持编译Windows、Linux系统。</p>
+<h5>需要准备的环境</h5>
+<p>在编译前，请确保您有：</p>
+<ul>
+<li><strong>[必要]</strong> make：用于执行Makefile，<strong>工具参考版本：GNU Make 3.82.90</strong></li>
+<li><strong>[必要]</strong> C++编译器：用于编译整个项目，默认为G++编译器，如需更换编译器请更改Makefile中的<code>COMPILER</code>宏，<strong>工具参考版本：g++ 13.1.0</strong></li>
+<li><strong>[非必要]</strong> strip：用于剥削调试信息，减小可执行文件体积，<strong>工具参考版本：GNU strip (GNU Binutils) 2.39</strong></li>
+<li><strong>[非必要]</strong> upx：用于压缩可执行文件体积，<strong>工具参考版本：upx 4.0.2</strong></li>
+</ul>
+<p>如果您未安装strip或upx，执行Makefile可能会报错，属正常现象，发行版仍然会编译成功。<strong>如果您希望发行版尽可能小，我们还是建议您安装strip和upx。</strong></p>
+<h5>开始编译</h5>
+<p>打开终端，切换到源码目录（即与<code>Makefile</code>同级的目录），您可以根据系统来使用编译指令：</p>
+<ul>
+<li><code>make release</code>：编译Windows发行版（旧指令，但仍然兼容）</li>
+<li><code>make release_win</code>：编译Windows发行版，在<code>bin</code>目录下生成<code>stamon.exe</code></li>
+<li><code>make release_linux</code>：编译Linux发行版，在<code>bin</code>目录下生成<code>stamon</code></li>
+</ul>
+<h3>使用发行版</h3>
+<h5>配置运行时环境</h5>
+<p>Stamon的运行时环境非常简便，您只需要配置至少一个环境变量即可使用：</p>
+<ul>
+<li><strong>[必要]</strong> <code>STAMON</code>变量：该变量指向可执行文件所在的<strong>目录（而非文件）</strong></li>
+<li><strong>[非必要]</strong> <code>PATH</code>变量：在该变量末尾<strong>追加</strong>上可执行文件所在目录</li>
+</ul>
+<p>如果不配置PATH变量，则Stamon无法全局使用（即只能在可执行文件所在目录下使用），<strong>因此我们强烈建议您配置PATH变量</strong></p>
+<h5>运行指令</h5>
+<p>Stamon目前支持以下指令：</p>
+<p><br></p>
+<ul>
+<li><code>stamon version</code></li>
+</ul>
+<p>该指令用于输出Stamon当前的版本号。</p>
+<p><br></p>
+<ul>
+<li><code>stamon help</code></li>
+</ul>
+<p>该指令用于输出Stamon的用法以及各种参数的介绍。</p>
+<p><br></p>
+<ul>
+<li><code>stamon build [src] [dst] [options...]</code></li>
+</ul>
+<p>该指令用于编译Stamon代码，其中src为必要参数，表示编译的Stamon文件名，dst为可选参数，表示生成的字节码文件名（默认a.stvc），options为可选参数，他们包括：</p>
+<p><code>--import=&lt;boolean&gt;  是否支持引用源码，默认为true）
+--strip=&lt;boolean&gt;   是否剥削调试信息，默认为false）
+-I&lt;path&gt;            添加引用路径</code></p>
+<p><br></p>
+<ul>
+<li><code>stamon run [src] [options...]</code></li>
+</ul>
+<p>该指令用于运行STVC文件，其中src为必要参数，表示编译的Stamon文件名，options为可选参数，他们包括：</p>
+<p><code>--GC=&lt;boolean&gt;          是否运行GC（垃圾自动回收），默认为true
+--MemLimit=&lt;Integer&gt;    设置虚拟机的对象内存限制（按字节计，默认为16,777,216字节，即16MB）</code></p>
+<p><br></p>
+<ul>
+<li><code>stamon strip [src]</code></li>
+</ul>
+<p>该指令用于剥削STVC调试信息，其中src为必要参数，表示待剥削的STVC文件。</p>
+<hr />
+<h3>接下来要做的事</h3>
+<ol>
+<li>编写AST的解释器</li>
+<li>编写词法分析的保存功能</li>
+<li>编写AST的O1优化器</li>
+<li>完善标准库</li>
+<li>支持编译为平面字节码</li>
+</ol>
+<h3>后记</h3>
+<p>总算是正式支持Linux了，这也极大的证明了Stamon的可移植性......</p>  </body>
+    </html>

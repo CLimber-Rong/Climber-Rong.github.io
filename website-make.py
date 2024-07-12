@@ -1,4 +1,22 @@
-<!DOCTYPE html>
+'''
+Name: 
+Copyright: 
+Author: 
+Date: 12/07/24 14:53
+Description: 
+'''
+import markdown
+import os
+
+paths = os.walk('./')
+
+for path, tmp2, file_list in paths:
+    for i in file_list:
+        if i.endswith('.md'):
+            html_path = i[0:-3] + '.html'
+            fin = open(os.path.join(path, i), 'r', encoding='utf8')
+            fout = open(os.path.join(path, html_path), 'w', encoding='utf8')
+            fout.write('''<!DOCTYPE html>
     <html>
     <meta charset="utf-8" />
     <title></title>
@@ -38,11 +56,8 @@
         </li>
         </ul>
     </nav>
-    <br><h1>依赖库开发指导</h1>
-<p>依赖库位于<code>src/include</code>中，其中的<code>template</code>目录是依赖库的模板（即接口定义），如果你想要移植Stamon，只需要实现<code>template</code>目录中定义的接口即可。</p>
-<p>为了示范，我将接口用C语言的标准库实现了一遍，并把代码放到<code>stdc_implemented</code>中。</p>
-<p>如果你所在的平台支持C语言的标准库（具体标准为C89），那么可以直接使用<code>stdc_implemented</code>作为依赖库。</p>
-<blockquote>
-<p>——摘自<code>工作日志20230131.md</code></p>
-</blockquote>  </body>
-    </html>
+    <br>'''
+                    +markdown.markdown(fin.read())
+                    +'''  </body>
+    </html>'''
+            )

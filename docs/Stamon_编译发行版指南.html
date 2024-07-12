@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+    <html>
+    <meta charset="utf-8" />
+    <title></title>
+
+    <!-- 新 Bootstrap4 核心 CSS 文件 -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- bootstrap.bundle.min.js 用于弹窗、提示、下拉菜单，包含了 popper.min.js -->
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+
+    <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    </head>
+
+    <body>
+    <nav class="navbar navbar-expand-sm bg-light justify-content-center">
+        <a class="navbar-brand" href="#">
+        <img src="https://CLimber-Rong.github.io/image/icon.png" alt="logo" style="width: 40px" />
+        </a>
+        <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="https://CLimber-Rong.github.io/index.html">首页</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="https://CLimber-Rong.github.io/about.html">关于</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="https://CLimber-Rong.github.io/doc.html">文档</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="https://CLimber-Rong.github.io/project.html">项目</a>
+        </li>
+        </ul>
+    </nav>
+    <br><h1>编译发行版指南</h1>
+<p>目前支持编译Windows、Linux系统。</p>
+<p>我们提供了两种编译方法：使用Makefile或CMake</p>
+<blockquote>
+<p>CMakeList由<a href="https://github.com/copi143">copi143</a>提供，谢谢！</p>
+</blockquote>
+<h2>使用CMake编译</h2>
+<h3>需要准备的环境</h3>
+<p>在编译前，请确保您有：</p>
+<ul>
+<li><strong>CMake</strong> 用于生成构建脚本 <strong>工具参考版本：CMake 3.29.5</strong></li>
+<li><strong>Make</strong> 或 <strong>Ninja</strong> 用于执行构建脚本 <strong>工具参考版本：GNU Make 3.82.90 或 Ninja 1.12.1</strong></li>
+<li><strong>C++编译器</strong> <code>gcc</code> <code>clang</code> <code>msvc</code> 三选一 <strong>工具参考版本：g++ 13.1.0</strong></li>
+<li><strong>strip</strong> 用于剥削调试信息，减小可执行文件体积 <strong>工具参考版本：GNU strip (GNU Binutils) 2.39</strong></li>
+<li><strong>upx</strong> 用于压缩可执行文件体积 <strong>工具参考版本：upx 4.0.2</strong></li>
+</ul>
+<p>如果您未安装strip或upx，cmake可能会报错，属正常现象，发行版仍然会编译成功。<strong>如果您希望发行版尽可能小，我们还是建议您安装strip和upx。</strong></p>
+<h3>开始编译</h3>
+<p>依次执行以下命令</p>
+<p><code>sh
+git clone https://github.com/copi143/stamon.git
+cd stamon &amp;&amp; mkdir build &amp;&amp; cd build
+cmake ..
+make</code></p>
+<p>如果使用的是 <strong>Ninja</strong> 则最后一步替换为</p>
+<p><code>sh
+ninja</code></p>
+<h2>使用Makefile编译</h2>
+<h3>需要准备的环境</h3>
+<p>在编译前，请确保您有：</p>
+<ul>
+<li><strong>[必要]</strong> make：用于执行Makefile，<strong>工具参考版本：GNU Make 3.82.90</strong></li>
+<li><strong>[必要]</strong> C++编译器：用于编译整个项目，默认为G++编译器，如需更换编译器请更改Makefile中的<code>COMPILER</code>宏，<strong>工具参考版本：g++ 13.1.0</strong></li>
+<li><strong>[非必要]</strong> strip：用于剥削调试信息，减小可执行文件体积，<strong>工具参考版本：GNU strip (GNU Binutils) 2.39</strong></li>
+<li><strong>[非必要]</strong> upx：用于压缩可执行文件体积，<strong>工具参考版本：upx 4.0.2</strong></li>
+</ul>
+<p>如果您未安装strip或upx，执行Makefile可能会报错，属正常现象，发行版仍然会编译成功。<strong>如果您希望发行版尽可能小，我们还是建议您安装strip和upx。</strong></p>
+<h3>开始编译</h3>
+<p>打开终端，切换到源码目录（即与<code>Makefile</code>同级的目录），您可以根据系统来使用编译指令：</p>
+<ul>
+<li><code>make release</code>：编译Windows发行版（旧指令，但仍然兼容）</li>
+<li><code>make release_win</code>：编译Windows发行版，在<code>bin</code>目录下生成<code>stamon.exe</code></li>
+<li><code>make release_linux</code>：编译Linux发行版，在<code>bin</code>目录下生成<code>stamon</code></li>
+</ul>  </body>
+    </html>

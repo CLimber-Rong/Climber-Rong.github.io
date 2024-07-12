@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+    <html>
+    <meta charset="utf-8" />
+    <title></title>
+
+    <!-- 新 Bootstrap4 核心 CSS 文件 -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- bootstrap.bundle.min.js 用于弹窗、提示、下拉菜单，包含了 popper.min.js -->
+    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+
+    <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    </head>
+
+    <body>
+    <nav class="navbar navbar-expand-sm bg-light justify-content-center">
+        <a class="navbar-brand" href="#">
+        <img src="https://CLimber-Rong.github.io/image/icon.png" alt="logo" style="width: 40px" />
+        </a>
+        <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="https://CLimber-Rong.github.io/index.html">首页</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="https://CLimber-Rong.github.io/about.html">关于</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="https://CLimber-Rong.github.io/doc.html">文档</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="https://CLimber-Rong.github.io/project.html">项目</a>
+        </li>
+        </ul>
+    </nav>
+    <br><h1>发行版使用指南</h1>
+<h5>配置运行时环境</h5>
+<p>Stamon的运行时环境非常简便，您只需要配置至少一个环境变量即可使用：</p>
+<ul>
+<li><code>STAMON</code>变量：该变量指向可执行文件所在的<strong>目录（而非文件）</strong></li>
+<li><strong>[非必要]</strong> <code>PATH</code>变量：在该变量末尾<strong>追加</strong>上可执行文件所在目录</li>
+</ul>
+<p>如果不配置PATH变量，则Stamon无法全局使用（即只能在可执行文件所在目录下使用），<strong>因此我们强烈建议您配置PATH变量</strong></p>
+<h5>运行指令</h5>
+<p>Stamon目前支持以下指令：</p>
+<p><br></p>
+<ul>
+<li><code>stamon version</code></li>
+</ul>
+<p>该指令用于输出Stamon当前的版本号。</p>
+<p><br></p>
+<ul>
+<li><code>stamon help</code></li>
+</ul>
+<p>该指令用于输出Stamon的用法以及各种参数的介绍。</p>
+<p><br></p>
+<ul>
+<li><code>stamon build [src] [dst] [options...]</code></li>
+</ul>
+<p>该指令用于编译Stamon代码，其中src为必要参数，表示编译的Stamon文件名，dst为可选参数，表示生成的字节码文件名（默认a.stvc），options为可选参数，他们包括：</p>
+<p><code>--import=&lt;boolean&gt;  是否支持引用源码，默认为true）
+--strip=&lt;boolean&gt;   是否剥削调试信息，默认为false）
+-I&lt;path&gt;            添加引用路径</code></p>
+<p><br></p>
+<ul>
+<li><code>stamon run [src] [options...]</code></li>
+</ul>
+<p>该指令用于运行STVC文件，其中src为必要参数，表示编译的Stamon文件名，options为可选参数，他们包括：</p>
+<p><code>--GC=&lt;boolean&gt;          是否运行GC（垃圾自动回收），默认为true
+--MemLimit=&lt;Integer&gt;    设置虚拟机的对象内存限制（按字节计，默认为16,777,216字节，即16MB）</code></p>
+<p><br></p>
+<ul>
+<li><code>stamon strip [src]</code></li>
+</ul>
+<p>该指令用于剥削STVC调试信息，其中src为必要参数，表示待剥削的STVC文件。</p>
+<blockquote>
+<p>——摘自<code>工作日志/20240616.md</code></p>
+</blockquote>  </body>
+    </html>
