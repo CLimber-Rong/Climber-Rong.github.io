@@ -52,9 +52,8 @@
 <li><strong>Make</strong> 或 <strong>Ninja</strong> 用于执行构建脚本 <strong>工具参考版本：GNU Make 3.82.90 或 Ninja 1.12.1</strong></li>
 <li><strong>C++编译器</strong> <code>gcc</code> <code>clang</code> <code>msvc</code> 三选一 <strong>工具参考版本：g++ 13.1.0</strong></li>
 <li><strong>strip</strong> 用于剥削调试信息，减小可执行文件体积 <strong>工具参考版本：GNU strip (GNU Binutils) 2.39</strong></li>
-<li><strong>upx</strong> 用于压缩可执行文件体积 <strong>工具参考版本：upx 4.0.2</strong></li>
 </ul>
-<p>如果您未安装strip或upx，cmake可能会报错，属正常现象，发行版仍然会编译成功。<strong>如果您希望发行版尽可能小，我们还是建议您安装strip和upx。</strong></p>
+<p>如果您未安装strip，cmake可能会报错，属正常现象，发行版仍然会编译成功。<strong>如果您希望发行版尽可能小，我们还是建议您安装strip。</strong></p>
 <h3>开始编译</h3>
 <p>依次执行以下命令</p>
 <p><code>sh
@@ -72,9 +71,8 @@ ninja</code></p>
 <li><strong>[必要]</strong> make：用于执行Makefile，<strong>工具参考版本：GNU Make 3.82.90</strong></li>
 <li><strong>[必要]</strong> C++编译器：用于编译整个项目，默认为G++编译器，如需更换编译器请更改Makefile中的<code>COMPILER</code>宏，<strong>工具参考版本：g++ 13.1.0</strong></li>
 <li><strong>[非必要]</strong> strip：用于剥削调试信息，减小可执行文件体积，<strong>工具参考版本：GNU strip (GNU Binutils) 2.39</strong></li>
-<li><strong>[非必要]</strong> upx：用于压缩可执行文件体积，<strong>工具参考版本：upx 4.0.2</strong></li>
 </ul>
-<p>如果您未安装strip或upx，执行Makefile可能会报错，属正常现象，发行版仍然会编译成功。<strong>如果您希望发行版尽可能小，我们还是建议您安装strip和upx。</strong></p>
+<p>如果您未安装strip，执行Makefile可能会报错，属正常现象，发行版仍然会编译成功。<strong>如果您希望发行版尽可能小，我们还是建议您安装strip。</strong></p>
 <h3>开始编译</h3>
 <p>打开终端，切换到源码目录（即与<code>Makefile</code>同级的目录），您可以根据系统来使用编译指令：</p>
 <ul>
