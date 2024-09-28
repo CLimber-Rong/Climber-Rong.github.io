@@ -1,0 +1,24 @@
+Manifesto of Open Source Project Protection (MOSPP)
+
+Version 1, September 2024
+https://CLimber-Rong.github.com/resource/mospp/mospp_en-us.txt
+
+The fundamental purpose of the open source spirit is to promote a more stable development of academic research, rather than being used, criticized, and destroyed by people. This manifesto serves only as a basic guideline for projects and does not hold significant legal binding force. We call for more people to abide by this manifesto, and for the public to distribute it.
+
+We hereby call upon developers to:
+
+
+1. Adhere to the relevant academic ethics
+Developers are naturally endowed with the basic rights stipulated by open source licenses, but we call for more developers with academic ethics to respect project authors. This is not moral coercion; developers have the right to ignore this suggestion.
+
+2. Open source project authors provide developers with more freedom rights, but this does not mean authors are obligated to serve developers
+Developers have certain freedom rights. Similarly, authors can autonomously decide what they want to do and how the project will evolve.
+
+3. Open source project authors are not obliged to accept destructive suggestions from other developers
+Destructiveness includes but is not limited to: destructive opinions on the future planning of project authors, destructive opinions on the basic principles of the project, and destructive opinions on the good communal environment.
+This is similar to the second point, but with the difference that: authors can consider user feedback without the obligation to serve developers, but destructive suggestions are intolerable.
+
+
+Open source project authors can append this manifesto to their projects as an ethical statement. Authors should also check for conflicts between the manifesto and the license. If there is a dispute, it will be interpreted according to the original Chinese version.
+
+May the open source world have a bright future!
