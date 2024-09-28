@@ -1,7 +1,7 @@
 开源项目保护宣言（Manifesto of Open Source Project Protection, MOSPP）
 
 第一版，2024年9月
-https://CLimber-Rong.github.com/resource/mospp/mospp_zh-cn.txt
+https://CLimber-Rong.github.io/resource/mospp/mospp_zh-cn.txt
 
 开源精神的根本主旨是推动学术研究更稳定的发展，而非仅供人盗用，批判和破坏。
 本宣言仅作项目的基本说明，并不具有相当的法律约束力，我们呼吁更多人遵守此宣言，社会公众也能分发此宣言。

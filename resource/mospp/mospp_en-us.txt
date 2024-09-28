@@ -1,7 +1,7 @@
 Manifesto of Open Source Project Protection (MOSPP)
 
 Version 1, September 2024
-https://CLimber-Rong.github.com/resource/mospp/mospp_en-us.txt
+https://CLimber-Rong.github.io/resource/mospp/mospp_en-us.txt
 
 The fundamental purpose of the open source spirit is to promote a more stable development of academic research, rather than being used, criticized, and destroyed by people. This manifesto serves only as a basic guideline for projects and does not hold significant legal binding force. We call for more people to abide by this manifesto, and for the public to distribute it.
 
