@@ -39,11 +39,22 @@
         </ul>
     </nav>
     <br><h1>编译发行版指南</h1>
-<p>目前支持编译Windows、Linux系统。</p>
-<p>我们提供了两种编译方法：使用Makefile或CMake</p>
+<p>目前已知支持编译Windows、Linux、Macos系统。</p>
+<p>我们提供了三种编译方法：使用Makefile或CMake或XMake。</p>
 <blockquote>
 <p>CMakeList由<a href="https://github.com/copi143">copi143</a>提供，谢谢！</p>
 </blockquote>
+<h2>使用XMake编译</h2>
+<h3>需要准备的环境</h3>
+<p>在编译前，请确保您有：</p>
+<ul>
+<li><strong>XMake</strong> 用于构建程序 <strong>工具参考版本：xmake v2.9.6</strong></li>
+<li><strong>C++编译器</strong> 一个合适的本地编译器 <strong>工具参考版本：g++ 13.1.0</strong></li>
+</ul>
+<h3>开始编译</h3>
+<p>执行以下命令进行构建：</p>
+<p><code>xmake</code></p>
+<p>使用<code>xmake run ...</code>即可运行程序。</p>
 <h2>使用CMake编译</h2>
 <h3>需要准备的环境</h3>
 <p>在编译前，请确保您有：</p>
@@ -57,7 +68,7 @@
 <h3>开始编译</h3>
 <p>依次执行以下命令</p>
 <p><code>sh
-git clone https://github.com/copi143/stamon.git
+git clone https://github.com/CLimber-Rong/stamon.git
 cd stamon &amp;&amp; mkdir build &amp;&amp; cd build
 cmake ..
 make</code></p>
@@ -79,5 +90,6 @@ ninja</code></p>
 <li><code>make release</code>：编译Windows发行版（旧指令，但仍然兼容）</li>
 <li><code>make release_win</code>：编译Windows发行版，在<code>bin</code>目录下生成<code>stamon.exe</code></li>
 <li><code>make release_linux</code>：编译Linux发行版，在<code>bin</code>目录下生成<code>stamon</code></li>
+<li><code>make release_macos</code>：编译MacOS发行版，在<code>bin</code>目录下生成<code>stamon</code></li>
 </ul>  </body>
     </html>
