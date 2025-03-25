@@ -38,17 +38,29 @@
         </li>
         </ul>
     </nav>
-    <br><div style="margin: auto;"><h1>2024/07/07 工作日志</h1>
-<p>本次并没有提交新功能。</p>
-<h3>重构了标准库</h3>
-<p>将调用sfn的代码封装成了<code>native</code>函数，并且定义了File类的架构。</p>
+    <br><div style="margin: auto;"><h1>2025/02/28 工作日志</h1>
+<p>本次更新不改变内部版本。
+本次更新修改了一些小瑕疵，改进了CMakeList.txt，新增了基于Makefile的Github Action。</p>
+<h3>修复CMakeList.txt</h3>
+<p>删去了<code>-march=native</code>参数。</p>
+<p>CMakeList.txt具有被弃用的可能性。</p>
+<h3>新增基于Makefile的Github Action</h3>
+<p>该文件位于<code>.github/workflows/makefile.yml</code></p>
+<p>经过了一晚上的调试，基于Makefile的Github Action终于被调试出来了。
+使用Makefile作为Github Action有以下好处：</p>
+<ul>
+<li>构建速度快（实验得出：Github Action使用Makefile的速度通常是使用CMakeList.txt的三倍以上）</li>
+<li>易读性强（使用Makefile的Github Workflow文件长度比使用CMakeList.txt的长度短很多，Makefile本身也比CMakeList.txt短很多，且更方便阅读）</li>
+<li>可控性高（Makefile通常只用了数条命令就构建出了程序，开发者可以很方便的修改参数）</li>
+</ul>
 <h3>接下来要做的事</h3>
 <ol>
+<li>将<code>TokenFileWriter</code>和<code>TokenFileReader</code>进行对接调试</li>
+<li>将<code>STVCReader.cpp</code>和<code>STVCWriter.cpp</code>迁移到<code>action</code>目录下，并将其改名为<code>AstIrReader.cpp</code>和<code>AstIrWriter.cpp</code></li>
+<li>为重构虚拟机做准备工作</li>
+<li>开发Stamon的安装工具</li>
+<li>推进Stamon包管理器的开发</li>
+<li>推进斯塔蒙的开发</li>
 <li>支持文件处理库</li>
-<li>支持编译为平面字节码</li>
-<li>编写词法分析的保存功能</li>
-<li>编写AST的O1优化器</li>
-<li>完善标准库</li>
-<li>编写AST的解释器</li>
 </ol> </div> </body>
     </html>

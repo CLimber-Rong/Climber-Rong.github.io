@@ -6,16 +6,16 @@
     <!-- 新 Bootstrap4 核心 CSS 文件 -->
     <link
         rel="stylesheet"
-        href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
+        href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
     />
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     <!-- bootstrap.bundle.min.js 用于弹窗、提示、下拉菜单，包含了 popper.min.js -->
-    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
 
     <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
     </head>
 
     <body>
@@ -38,17 +38,20 @@
         </li>
         </ul>
     </nav>
-    <br><h1>虚拟机开发文档</h1>
+    <br><div style="margin: auto;"><h1>AstRunner开发文档</h1>
+<blockquote>
+<p>注意：此文档旨在说明<code>AstRunner</code>（以下简称“虚拟机”）的工作原理</p>
+</blockquote>
 <p>虚拟机的运行原理为：将二进制文件读取为AstIR，交给AstIRGenerator类解析为Running-Ast，最后交给<code>vm/AstRunner.cpp</code>递归运行。</p>
 <p>我们规定：Stamon编译后的二进制文件为<strong>STVC文件</strong>，文件后缀为<code>.stvc</code></p>
 <p>我们来逐步讲解。</p>
-<p>首先是二进制文件读取为AstIR，这部分的实现位于<code>src/vm/STVCReader.cpp</code>，STVCReader类的主要接口有：</p>
+<p>首先是二进制文件读取为AstIR，这部分的实现位于<code>src/vm/AstIrReader.cpp</code>，AstIrReader类的主要接口有：</p>
 <ul>
-<li><code>STVCReader(char* vmcode, int code_size, STMException* e)</code>：构造函数，vmcode为字节码在内存中的地址，code_size指字节码的大小，e为异常类</li>
+<li><code>AstIrReader(char* vmcode, int code_size, STMException* e)</code>：构造函数，vmcode为字节码在内存中的地址，code_size指字节码的大小，e为异常类</li>
 <li><code>bool ReadHeader()</code>：读取字节码头，读取失败则抛出异常并返回false，否则返回true</li>
 <li><code>ArrayList&lt;AstIR&gt; ReadIR()</code>：读取AstIR，返回由AstIR组成的ArrayList</li>
 </ul>
-<p>想要完整的读取一个STVC文件，应该要先创建一个STVCReader对象，然后先调用<code>ReadHeader</code>读取文件头信息，接着调用<code>ReadIR</code>来读取AstIR。调用这两个函数之后要分别检查是否有异常抛出。</p>
+<p>想要完整的读取一个STVC文件，应该要先创建一个AstIrReader对象，然后先调用<code>ReadHeader</code>读取文件头信息，接着调用<code>ReadIR</code>来读取AstIR。调用这两个函数之后要分别检查是否有异常抛出。</p>
 <p>接着是让AstIRGenerator类解析为Running-Ast，这一部分在<strong>写了Ast与AstIR之间的互转工具</strong>部分里已经详细提及过了，故不再赘述。</p>
 <p>最后是交给<code>vm/AstRunner.cpp</code>递归运行，<code>AstRunner</code>类采用了和语法分析器类似的结构，下面我们来看看重点的数据接口及接口：</p>
 <p>AstRunner在递归执行Ast时的返回值为<code>RetStatus</code>类。RetStatus，全称<em>Return-Status（返回状态）</em>，用于指示当前代码运行状况，我们来看看RetStatus的定义：</p>
@@ -105,5 +108,5 @@ RetStatus excute(
 <p>虚拟机在执行过程中会向ObjectManager申请对象，来实现GC机制。</p>
 <blockquote>
 <p>——摘自<code>工作日志/20240512.md</code></p>
-</blockquote>  </body>
+</blockquote> </div> </body>
     </html>

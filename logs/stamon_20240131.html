@@ -6,16 +6,16 @@
     <!-- 新 Bootstrap4 核心 CSS 文件 -->
     <link
         rel="stylesheet"
-        href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
+        href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
     />
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     <!-- bootstrap.bundle.min.js 用于弹窗、提示、下拉菜单，包含了 popper.min.js -->
-    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
 
     <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
     </head>
 
     <body>
@@ -38,7 +38,7 @@
         </li>
         </ul>
     </nav>
-    <br><h1>2024/01/31 工作日志</h1>
+    <br><div style="margin: auto;"><h1>2024/01/31 工作日志</h1>
 <h3>声明</h3>
 <p>本项目由STVM改进而来，<a href="https://github.com/CLimber-Rong/stvm">STVM地址</a></p>
 <p>由于一些原因（详见后记），我不得不先从编译器开始编写。</p>
@@ -81,8 +81,6 @@
 <h3>新增测试用例</h3>
 <p>新增了词法分析器的测试样例，位于<code>test_case/lexer/</code>中。</p>
 <p>如果你想要编译运行测试样例，请将测试样例中的<code>test.cpp</code>覆盖到<code>test/test.cpp</code>当中，然后使用Makefile调试。</p>
-<h3>给Stamon设计了Logo</h3>
-<p>怎么说呢，这个logo有点简陋？</p>
 <h3>怎样编译运行测试代码</h3>
 <p>无论是调试你自己编写的测试代码，抑或是调试测试样例，都至少需要配置好以下工具：</p>
 <ul>
@@ -99,11 +97,5 @@
 <li><code>make build</code>：编译项目，生成一个<code>test.exe</code>，即项目可执行文件</li>
 <li><code>make run</code>：运行项目</li>
 <li><code>make zip</code>：将项目可执行文件进行压缩 <strong>（该指令需要用到strip和upx）</strong></li>
-</ul>
-<hr />
-<h3>后记</h3>
-<p>这次的更新比以往所有的更新都更加全面，并且该项目的开发方针也进行了大幅度的改善。</p>
-<p>之所以变动会这么大，是因为我要在二月份参加一个重要的创新比赛，这也就意味着我必须在二月份开发出一个能运行的语言。</p>
-<p>再加上我的学业（临近中考），所以我会变得很忙。</p>
-<p>最后...祝大家中国新年快乐！</p>  </body>
+</ul> </div> </body>
     </html>

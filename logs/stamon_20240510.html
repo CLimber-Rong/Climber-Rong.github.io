@@ -6,16 +6,16 @@
     <!-- 新 Bootstrap4 核心 CSS 文件 -->
     <link
         rel="stylesheet"
-        href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
+        href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
     />
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     <!-- bootstrap.bundle.min.js 用于弹窗、提示、下拉菜单，包含了 popper.min.js -->
-    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
 
     <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
     </head>
 
     <body>
@@ -38,17 +38,9 @@
         </li>
         </ul>
     </nav>
-    <br><!--
- * @Name: 
- * @Copyright: 
- * @Author: 
- * @Date: 10/05/24 19:41
- * @Description: 
--->
-<h1>2024/05/10 工作日志</h1>
+    <br><div style="margin: auto;"><h1>2024/05/10 工作日志</h1>
 <h3>好久不见！</h3>
-<p>在二月份的时候，本项目就已经开发完成，并投稿至一个科创比赛。令人震惊的是：现在本项目已经一路过关斩将参与国家级评选了。</p>
-<p>为了让项目准备更充分，我决定进行更新。</p>
+<p>在二月份的时候，本项目就已经开发完成，为了让项目准备更充分，我决定进行更新。</p>
 <p>本次的更新将会从语法分析器直接跳跃到完整的编译器、虚拟机。</p>
 <h3>更新了依赖库</h3>
 <p>本次新增了<code>BinaryReader.hpp</code>、<code>BinaryWriter.hpp</code>和<code>ByteMap.hpp</code>。</p>
@@ -179,7 +171,7 @@ class AstIR {
 <h3>完成了SFN机制</h3>
 <p>SFN机制在本项目原所在仓库中有提及，这里再次摘抄：</p>
 <blockquote>
-<p>SFN，全程Stamon For Native（~~真的不是So Fck NVIDIA~~）。是StamonVM的一个调用外部功能的机制。你可以用它与解释器交互。</p>
+<p>SFN，全称Stamon For Native。是StamonVM的一个调用外部功能的机制。你可以用它与解释器交互。</p>
 </blockquote>
 <p>用不太准确但方便理解的说法是：SFN和JNI类似，都是一种本地库调用机制。</p>
 <p>SFN的源码位于<code>src/sfn/SFN.cpp</code>。</p>
@@ -293,8 +285,5 @@ RetStatus excute(
 <li>编写词法分析的保存功能</li>
 <li>编写AST的O1优化器</li>
 <li>完善标准库</li>
-</ol>
-<h3>后记</h3>
-<p>这一次的文档编写花费了我将近两天的时间，现在回过头来，回想项目成立之初的7月份，我压根没敢想象现在的盛况，无数次的实践都让我有了一丝向前看的底气。</p>
-<p>这个项目此时并不是一次练习、一个发明了，而是一种态度。</p>  </body>
+</ol> </div> </body>
     </html>

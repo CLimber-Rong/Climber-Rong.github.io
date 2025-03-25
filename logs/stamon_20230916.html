@@ -1,67 +1,56 @@
-<!--
- * @Name: 
- * @Copyright: 
- * @Author: 
- * @Date: 16/09/23 14:16
- * @Description: 
--->
 <!DOCTYPE html>
-<html>
+    <html>
     <meta charset="utf-8" />
     <title></title>
 
     <!-- 新 Bootstrap4 核心 CSS 文件 -->
     <link
-      rel="stylesheet"
-      href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
+        rel="stylesheet"
+        href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
     />
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     <!-- bootstrap.bundle.min.js 用于弹窗、提示、下拉菜单，包含了 popper.min.js -->
-    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
 
     <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  </head>
+    <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    </head>
 
-  <body>
+    <body>
     <nav class="navbar navbar-expand-sm bg-light justify-content-center">
-      <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="#">
         <img src="https://CLimber-Rong.github.io/image/icon.png" alt="logo" style="width: 40px" />
-      </a>
-      <ul class="navbar-nav">
+        </a>
+        <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="https://CLimber-Rong.github.io/index.html">首页</a>
+            <a class="nav-link" href="https://CLimber-Rong.github.io/index.html">首页</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="https://CLimber-Rong.github.io/about.html">关于</a>
+            <a class="nav-link" href="https://CLimber-Rong.github.io/about.html">关于</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="https://CLimber-Rong.github.io/doc.html">文档</a>
+            <a class="nav-link" href="https://CLimber-Rong.github.io/doc.html">文档</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="https://CLimber-Rong.github.io/project.html">项目</a>
+            <a class="nav-link" href="https://CLimber-Rong.github.io/project.html">项目</a>
         </li>
-      </ul>
+        </ul>
     </nav>
-    <br>
-    
-<h1 id="2023-09-16-">2023/09/16 工作日志</h1>
-<h3 id="-">提交了代码漏洞修复和代码测试</h3>
+    <br><div style="margin: auto;"><h1>2023/09/16 工作日志</h1>
+<h3>提交了代码漏洞修复和代码测试</h3>
 <p>本次修复了代码当中的漏洞，并提交了对代码的测试。
 <br><br>
 本次提交的测试是STVM自创建以来的第一次测试。
 <br><br>
 本次测试的代码位于src/test目录当中的stvm_test.cpp，为了编译stvm_test.cpp，我在根目录下编写了Makefile。
 <br><br></p>
-<p>其中，Makefile的用法是：</p>
-<ol>
-<li>make clean：删除可执行文件</li>
-<li>make build：编译可执行文件</li>
-<li>make zip：压缩可执行文件</li>
-<li>make run：编译并运行可执行文件</li>
-</ol>
+<p>其中，Makefile的用法是：
+1. make clean：删除可执行文件
+2. make build：编译可执行文件
+3. make zip：压缩可执行文件
+4. make run：编译并运行可执行文件</p>
 <p><br><br>
 目前，Makefile是临时的，并且仅能在Windows系统下使用，如果想要在其他系统编译，可以更改Makefile。
 <br><br>
@@ -75,9 +64,8 @@
 <p><br>
 upx和strip仅用于压缩可执行文件，如果不需要压缩，可以不需要这两个工具。
 <br><br></p>
-<h3 id="-">接下来要做的事：</h3>
+<h3>接下来要做的事：</h3>
 <ol>
 <li>完成STVM的内部数据结构</li>
-</ol>
-  </body>
-</html>
+</ol> </div> </body>
+    </html>

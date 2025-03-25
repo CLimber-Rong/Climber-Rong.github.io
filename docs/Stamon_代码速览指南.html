@@ -6,16 +6,16 @@
     <!-- 新 Bootstrap4 核心 CSS 文件 -->
     <link
         rel="stylesheet"
-        href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
+        href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
     />
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     <!-- bootstrap.bundle.min.js 用于弹窗、提示、下拉菜单，包含了 popper.min.js -->
-    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
 
     <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
     </head>
 
     <body>
@@ -38,14 +38,7 @@
         </li>
         </ul>
     </nav>
-    <br><!--
- * @Name: 
- * @Copyright: 
- * @Author: 
- * @Date: 19/10/24 16:34
- * @Description: 
--->
-<h1>代码速览指南（第一版）</h1>
+    <br><div style="margin: auto;"><h1>代码速览指南（第一版）</h1>
 <h3>第一版前言</h3>
 <p>本指南将于其发布时起指导作用，直到下一版发布时将会过时。
 本指南旨在让开发者在5分钟内快速了解项目架构以及阅读顺序。</p>
@@ -93,6 +86,14 @@
 </ul>
 <p>该目录存储Stamon的标准库源码。</p>
 <ul>
+<li><code>src/error</code></li>
+</ul>
+<p>该目录存储报错信息的生成函数。</p>
+<ul>
+<li><code>src/config</code></li>
+</ul>
+<p>该目录存储程序运行的默认配置参数。</p>
+<ul>
 <li><code>src/compiler</code></li>
 </ul>
 <p>该目录存储编译器的实现。</p>
@@ -108,17 +109,24 @@
 <li><code>src/vm</code></li>
 </ul>
 <p>该目录存储虚拟机的实现。</p>
+<ul>
+<li><code>src/action</code></li>
+</ul>
+<p>该目录用于存储分步行动机制的实现代码（包括一些文件的编解码实现）。</p>
 <h3>源码阅读顺序</h3>
 <p>我们建议开发者先从基础出发，一步步看到主函数的实现。</p>
 <p>因此一个合理的源码阅读流程是（以目录为单位）：</p>
 <ul>
 <li><code>include</code></li>
 <li><code>src/ast</code></li>
+<li><code>src/config</code></li>
+<li><code>src/error</code></li>
 <li><code>src/compiler</code></li>
 <li><code>src/vm</code></li>
 <li><code>src/sfn</code></li>
+<li><code>src/action</code></li>
 <li><code>src/ir</code></li>
 <li><code>src</code></li>
 <li><code>src/bin-include</code></li>
-</ul>  </body>
+</ul> </div> </body>
     </html>

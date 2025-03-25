@@ -38,17 +38,26 @@
         </li>
         </ul>
     </nav>
-    <br><div style="margin: auto;"><h1>2024/07/07 工作日志</h1>
-<p>本次并没有提交新功能。</p>
-<h3>重构了标准库</h3>
-<p>将调用sfn的代码封装成了<code>native</code>函数，并且定义了File类的架构。</p>
+    <br><div style="margin: auto;"><h1>2025/03/08 工作日志</h1>
+<p>本次没有提交新功能。</p>
+<h3>整理了项目异常信息的代码</h3>
+<p>将编译端和AstRunner的异常信息生成函数整理在了<code>src/error</code>目录下，并为每种异常信息写了注解。
+此举意在整合冗余代码，方便后续编写有关异常信息解决方案的文档。
+顺便修复了异常信息的语病。</p>
+<h3>整理了程序运行参数的默认值</h3>
+<p>将这些散落在代码各处的默认值整合到了<code>src/config</code>目录下，其中<code>src/config/StamonConfig.hpp</code>是这个目录的领导性文件，引用此文件即可引用该目录下的所有源码。</p>
+<h3>整理了Main.cpp的代码</h3>
+<p>main函数应该是简洁的，因此我把参数解析的代码封装到了源码底部。</p>
+<h3>整理了代码</h3>
+<p>为了确保文档的时间顺序性，我将<code>20240510.md</code>和<code>20241029.md</code>稍作修改。</p>
 <h3>接下来要做的事</h3>
 <ol>
+<li>将<code>TokenFileWriter</code>和<code>TokenFileReader</code>进行调试</li>
+<li>为重构虚拟机做准备工作</li>
+<li>实现分步行动机制</li>
+<li>开发Stamon的安装工具</li>
+<li>推进Stamon包管理器的开发</li>
+<li>推进斯塔蒙的开发</li>
 <li>支持文件处理库</li>
-<li>支持编译为平面字节码</li>
-<li>编写词法分析的保存功能</li>
-<li>编写AST的O1优化器</li>
-<li>完善标准库</li>
-<li>编写AST的解释器</li>
 </ol> </div> </body>
     </html>

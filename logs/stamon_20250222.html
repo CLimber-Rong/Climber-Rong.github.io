@@ -38,17 +38,24 @@
         </li>
         </ul>
     </nav>
-    <br><div style="margin: auto;"><h1>2024/07/07 工作日志</h1>
-<p>本次并没有提交新功能。</p>
-<h3>重构了标准库</h3>
-<p>将调用sfn的代码封装成了<code>native</code>函数，并且定义了File类的架构。</p>
+    <br><div style="margin: auto;"><h1>2025/02/22 工作日志</h1>
+<p>本次更新的内部版本为<code>2.4.37</code>。
+本次更新并不会发行<code>2.4.37</code>。</p>
+<p>本次提交修改了STVC-TAC的规范，修复了依赖库的内存泄漏问题。</p>
+<h3>修改了STVC-TAC的规范</h3>
+<p>在正式重构虚拟机之前，编写一篇好的规范非常重要。
+今后这篇规范还会持续更新，直到我认为足够成熟为止。</p>
+<h3>重构了依赖库的C语言标准库实现</h3>
+<p>我将ArrayList的引用构造改写为了拷贝构造，使其不再出现内存泄漏。
+与此同时，我也运用了引用计数法，用智能指针封装了<code>ByteMap</code>的<code>STRIE*</code>。又用<code>ByteMap</code>代替了<code>StringMap</code>和<code>NumberMap</code>的内部实现，减少了冗余代码，使其不再出现内存泄漏。</p>
 <h3>接下来要做的事</h3>
 <ol>
+<li>将<code>TokenFileWriter</code>和<code>TokenFileReader</code>进行对接调试</li>
+<li>将<code>STVCReader.cpp</code>和<code>STVCWriter.cpp</code>迁移到<code>action</code>目录下，并将其改名为<code>AstIrReader.cpp</code>和<code>AstIrWriter.cpp</code></li>
+<li>为重构虚拟机做准备工作</li>
+<li>开发Stamon的安装工具</li>
+<li>推进Stamon包管理器的开发</li>
+<li>推进斯塔蒙的开发</li>
 <li>支持文件处理库</li>
-<li>支持编译为平面字节码</li>
-<li>编写词法分析的保存功能</li>
-<li>编写AST的O1优化器</li>
-<li>完善标准库</li>
-<li>编写AST的解释器</li>
 </ol> </div> </body>
     </html>

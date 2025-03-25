@@ -6,16 +6,16 @@
     <!-- 新 Bootstrap4 核心 CSS 文件 -->
     <link
         rel="stylesheet"
-        href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
+        href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
     />
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     <!-- bootstrap.bundle.min.js 用于弹窗、提示、下拉菜单，包含了 popper.min.js -->
-    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
 
     <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
     </head>
 
     <body>
@@ -38,7 +38,7 @@
         </li>
         </ul>
     </nav>
-    <br><h1>编译器开发文档</h1>
+    <br><div style="margin: auto;"><h1>编译器开发文档</h1>
 <p>这些源码位于<code>src/compiler</code>目录下</p>
 <p>我们规定：Stamon源码的文件后缀为<code>.st</code></p>
 <p>词法分析器的变动不大。所以我们先来看看语法分析器。</p>
@@ -103,19 +103,18 @@ class AstIR {
 <h3>完成了SFN机制</h3>
 <p>SFN机制在本项目原所在仓库中有提及，这里再次摘抄：</p>
 <blockquote>
-<p>SFN，全程Stamon For Native（~~真的不是So Fck NVIDIA~~）。是StamonVM的一个调用外部功能的机制。你可以用它与解释器交互。</p>
+<p>SFN，全称Stamon For Native。是StamonVM的一个调用外部功能的机制。你可以用它与解释器交互。</p>
 </blockquote>
 <p>用不太准确但方便理解的说法是：SFN和JNI类似，都是一种本地库调用机制。</p>
 <p>SFN的源码位于<code>src/sfn/SFN.cpp</code>。</p>
-<p>SFN在Stamon中的语法规定为<code>sfn port, arg;</code>，其中port必须为整数（默认范围为0~65536），代表着端口号，使用不同的端口号会调用不同的本地库（类似于汇编中的IO），arg则是参数，在调用SFN后，arg可能会变为调用后的结果。</p>
+<p>SFN在Stamon中的语法规定为<code>sfn port, arg;</code>，其中port必须为字符串，代表着端口号，使用不同的端口号会调用不同的本地库（类似于汇编中的IO），arg则是参数，在调用SFN后，arg可能会变为调用后的结果。</p>
 <p>SFN中的本地库可以由用户自定义，可扩展性高，不过我认为应该要给SFN划分具体的标准，哪一部分端口保留用作标准的本地库，哪一部分交给用户自定义。我可能会在后续进行调整。</p>
 <p>SFN类的主要接口有：</p>
 <ul>
-<li><code>SFN(STMException* e, vm::ObjectManager* objman)</code>：构造函数，e为异常类，objman为当前运行时的ObjectManager对象。你可以在构造函数里绑定自己的本地库。详细请参见源码。
-~~* <code>void call(int port, datatype::Variable* arg)</code>：根据端口号调用本地库。~~</li>
+<li><code>SFN(STMException* e, vm::ObjectManager* objman)</code>：构造函数，e为异常类，objman为当前运行时的ObjectManager对象。你可以在构造函数里绑定自己的本地库。详细请参见源码。</li>
 <li><code>void call(String port, datatype::Variable* arg)</code>：根据端口号调用本地库。</li>
 </ul>
 <blockquote>
-<p>——摘自<code>工作日志/20240512.md</code></p>
-</blockquote>  </body>
+<p>——改编自<code>工作日志/20240512.md</code></p>
+</blockquote> </div> </body>
     </html>

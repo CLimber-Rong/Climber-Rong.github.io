@@ -6,16 +6,16 @@
     <!-- 新 Bootstrap4 核心 CSS 文件 -->
     <link
         rel="stylesheet"
-        href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
+        href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
     />
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     <!-- bootstrap.bundle.min.js 用于弹窗、提示、下拉菜单，包含了 popper.min.js -->
-    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
 
     <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
     </head>
 
     <body>
@@ -38,10 +38,10 @@
         </li>
         </ul>
     </nav>
-    <br><h1>STVC-TAC中间代码规范</h1>
+    <br><div style="margin: auto;"><h1>STVC-TAC中间代码规范（第二版）</h1>
 <h3>前言</h3>
 <h5>什么是STVC-TAC？</h5>
-<p><code>STVC-TAC</code>（以下简称<code>STVC</code>）是一种以三地址码为基础的平面字节码规范。</p>
+<p><code>STVC-TAC</code>（又称<code>TAC-IR</code>，以下简称<code>STVC</code>）是一种以三地址码为基础的平面字节码规范。</p>
 <blockquote>
 <p><code>STVC-TAC</code>区别于<code>AST-IR</code>，前者的字节码是线性且平面的，而后者则是递归且树状的。</p>
 </blockquote>
@@ -70,10 +70,18 @@
 <h3>基本概念和基本语句</h3>
 <h5>标识符</h5>
 <p>标识符有三个种类：用户标识符，临时标识符和内部标识符。</p>
-<p>用户标识符一般为用户自定义的标识符，其格式与C标识符格式相同。</p>
-<p>临时标识符则是表达式计算过程当中会用到的标识符，此类标识符的格式为<code>.XXX</code>，其中“XXX”为数字。</p>
-<p>内部标识符则是用于匿名类、匿名函数的声明，此类标识符的格式为<code>#XXX</code>，其中“XXX”为数字。</p>
+<p><strong>用户标识符</strong>一般为用户自定义的标识符，其格式与C标识符格式相同。</p>
+<p><strong>临时标识符</strong>则是表达式计算过程当中会用到的标识符，此类标识符的格式为<code>.XXX</code>，其中“XXX”为数字。</p>
+<p><strong>内部标识符</strong>则是用于匿名类、匿名函数的声明，此类标识符的格式为<code>#XXX</code>，其中“XXX”为数字。</p>
 <p>因此编译器在编译时应先指明标识符的类型，再指明标识符的编号。</p>
+<h5>SFN</h5>
+<p>SFN，全称<em>Stamon For Native</em>，是Stamon调用外部库的一个机制。调用SFN时，需要指定一个端口并提供参数，不同的端口对应不同的外部功能。</p>
+<h5>容器</h5>
+<p>“容器”的概念与“成员”的概念恰好相反。</p>
+<p>如果一个对象 <em>O</em> 拥有一个成员 <em>m</em>，那么规定 <em>O</em> 是 <em>m</em> 的容器。</p>
+<p>初始化一个类对象时，通常需要初始化类方法。
+而初始化类方法时，通常需要为其指定容器。这样用户在调用类方法时，Stamon会自动将容器传入“self”参数，从而实现类方法调用其他类成员。</p>
+<p>类方法和全局函数在数据类型上是相同的。唯一不同之处在于：类方法拥有容器，而全局函数不具有容器。</p>
 <h5>运算语句</h5>
 <ol>
 <li><code>x = ASSIGN y</code></li>
@@ -88,140 +96,135 @@
 </ol>
 <p>将y和z进行双目运算（运算符为op）之后的值传入x。</p>
 <p>上述的ASSIGN、UNARY和BINARY均为助记符，虚拟机可以通过助记符直接判断运算类型。助记符应当在二进制文件中表现出来。</p>
+<ol>
+<li><code>x[index] = y</code></li>
+</ol>
+<p>将x的第index个元素赋值为y。</p>
+<ol>
+<li><code>x = y[index]</code></li>
+</ol>
+<p>将x赋值为y的第index个元素。</p>
+<ol>
+<li><code>x.member = y</code></li>
+</ol>
+<p>将x的member成员赋值为y。</p>
+<ol>
+<li><code>x = y.member</code></li>
+</ol>
+<p>将x赋值为y的member成员。</p>
 <h5>流程控制语句</h5>
 <ol>
 <li><code>goto addr</code></li>
 </ol>
 <p>无条件跳转至相对addr行指令所在处。若addr&lt;0，向上跳转，否则向下跳转。</p>
 <ol>
-<li><code>if condition =&gt; addr</code></li>
+<li><code>if condition addr</code></li>
 </ol>
 <p>如果condition不为<code>null</code>或<code>0</code>则跳转至相对addr行指令所在处。若addr&lt;0，向上跳转，否则向下跳转。</p>
 <ol>
-<li><code>call result function: arg1 arg2 ...</code></li>
+<li><code>call result function arg1 arg2 ...</code></li>
 </ol>
 <p>调用function值。参数为arg1、arg2等标识符或值。返回值存入result当中。</p>
 <ol>
 <li><code>return value</code></li>
 </ol>
 <p>返回value值。</p>
-<ol>
-<li><code>try addr</code></li>
-</ol>
-<p>监测该以下addr（addr必须是正数）行的代码是否有抛出异常，如果出现异常，就直接跳转到<code>try</code>指令以下addr行（即跳过try代码块），因此try代码块在包含本应包含的代码的同时，也要在结尾加上<code>goto catch代码块大小</code>，以此跳过catch块；在try代码块后需要紧跟着catch代码块。</p>
 <p>值得注意的是：
 * 入口代码不需要在结尾返回
 * 跳转的指令偏差应该是能接受的（如一个函数有五条指令，显然不能往下跳转六条指令）</p>
-<h5>特别的...</h5>
+<h5>内存操作语句</h5>
 <ol>
 <li><code>new object source arg1 arg2 ...</code></li>
 </ol>
-<p>将source标识符作为类，新建对象，构造参数为arg1、arg2等，新建后的对象值存入object标识符</p>
-<ol>
-<li><code>member dst src mber</code></li>
-</ol>
-<p>将src中的mber成员取出，存入dst。</p>
-<ol>
-<li><code>sfn port arg</code></li>
-</ol>
-<p>设置SFN，port为端口号标识符。arg参数标识符。</p>
-<p>SFN的介绍见<code>编译器开发文档.md</code></p>
+<p>将source标识符作为类，新建对象，构造参数为arg1、arg2等，新建后的对象值存入object标识符。</p>
 <ol>
 <li><code>list identifier element1 element2...</code></li>
 </ol>
-<p>将element1、element2...作为元素，组合成数列，并存入identifier标识符中</p>
+<p>将element1、element2...作为元素，组合成数列，并存入identifier标识符中。</p>
 <ol>
-<li><code>pushscope</code></li>
+<li><code>array identifier length</code></li>
 </ol>
-<p>压入一个作用域，用于跳转指令</p>
-<ol>
-<li><code>popscope</code></li>
-</ol>
-<p>弹出一个作用域，用于跳转指令</p>
+<p>将identifier赋值为一个长度为length的空数列。</p>
 <ol>
 <li><code>free identifier</code></li>
 </ol>
 <p>如果identifier所存储的是字面量值（如整型），则释放。该指令和C语言的register关键字类似，<strong>是否释放取决于虚拟机状态。</strong>该指令通常用于释放临时标识符。</p>
+<h5>作用域操作语句</h5>
 <ol>
-<li><code>throw identifier</code></li>
+<li><code>pushscope</code></li>
 </ol>
-<p>将identifier标识符所存储的值作为异常内容，进行抛出。</p>
+<p>压入一个作用域，用于跳转指令。</p>
+<ol>
+<li><code>popscope</code></li>
+</ol>
+<p>弹出一个作用域，用于跳转指令。</p>
+<ol>
+<li><code>def identifier</code></li>
+</ol>
+<p>在当前作用域定义一个名为identifier的变量。</p>
+<h5>异常处理语句</h5>
+<ol>
+<li><code>pushcatch addr</code></li>
+</ol>
+<p>进入一个新的try-catch块时，需要调用该指令，addr为catch块的地址。</p>
+<ol>
+<li><code>popcatch</code></li>
+</ol>
+<p>退出一个try-catch块时，需要调用该指令。</p>
 <ol>
 <li><code>getexception identifier</code></li>
 </ol>
 <p>将当前异常内容存入identifier。</p>
+<h5>外部库调用语句</h5>
 <ol>
-<li><code>resetexceptionflag</code></li>
+<li><code>sfn port arg</code></li>
 </ol>
-<p>重置异常标记（即标记为无异常状态）。</p>
+<p>调用SFN的port端口，参数为arg。</p>
 <h3>代码声明</h3>
 <p>代码声明部分包含了函数定义和类定义。虚拟机在执行入口代码时会先初始化这些定义的对象。</p>
 <h5>声明函数</h5>
-<p><code>function identifier: arg1 arg2 arg3 ...
+<p><code>function identifier arg1 arg2 ...
 ...some codes...
 end</code></p>
-<p>其中identifier为函数名。arg1、arg2、arg3等为函数的参数名。“...some codes...”为函数体代码</p>
+<p>其中identifier为函数名。arg1、arg2等为函数的参数名。“...some codes...”为函数体代码。</p>
 <p>函数内部不能嵌套声明函数或类（因此需要在函数外部，用内部标识符定义函数或类，在运行时赋值）。</p>
 <h5>声明类</h5>
-<p><code>class identifier: member1 member2 member3 ...
+<p><code>class identifier member1 member2 * member3...
 ...some codes...
-method member1 member2 ... 
 end</code></p>
 <p>其中identifier为类名。member1、member2、member3等为类成员名。“...some codes...”为类初始化赋值代码（并不是构造函数）。</p>
-<p>method语句包含了若干个标识符，表示此标识符为方法。</p>
-<p>在初始化类对象时，会先执行初始化赋值代码，根据method语句为方法指定容器，再调用构造函数。</p>
+<p>如果类成员名的左侧带有“*”，则代表此成员是类方法。</p>
+<p>在初始化类对象时，会先执行初始化赋值代码，接着为类方法指定容器，再调用构造函数。</p>
 <p>类内部不能嵌套声明函数或类（因此需要在在外部用内部标识符定义函数或类，在初始化时赋值）。</p>
 <h3>入口代码</h3>
 <p>全局编写的代码就是入口代码，编译器需要整理入口代码并集中放置在可执行文件的末尾。</p>
 <h3>附表</h3>
-<p>所有基本语句有以下几种：</p>
+<p>所有语句有以下几种：</p>
 <ul>
 <li><code>x = ASSIGN y</code></li>
 <li><code>x = UNARY op y</code></li>
 <li><code>x = BINARY y op z</code></li>
+<li><code>x[index] = y</code></li>
+<li><code>x = y[index]</code></li>
+<li><code>x.member = y</code></li>
+<li><code>x = y.member</code></li>
 <li><code>goto addr</code></li>
 <li><code>if condition =&gt; addr</code></li>
-<li><code>call result function: arg1 arg2 ...</code></li>
+<li><code>call result function arg1 arg2 ...</code></li>
 <li><code>return value</code></li>
-<li><code>try addr</code></li>
 <li><code>new object source arg1 arg2 ...</code></li>
-<li><code>member dst src mber</code></li>
-<li><code>sfn port arg</code></li>
 <li><code>list identifier element1 element2...</code></li>
+<li><code>array identifier length</code></li>
+<li><code>free identifier</code></li>
 <li><code>pushscope</code></li>
 <li><code>popscope</code></li>
-<li><code>free identifier</code></li>
+<li><code>def identifier</code></li>
+<li><code>pushcatch addr</code></li>
+<li><code>popcatch</code></li>
 <li><code>getexception identifier</code></li>
-<li><code>resetexceptionflag</code></li>
-</ul>
-<p>双目运算符有以下种类：</p>
-<ul>
-<li>add：加</li>
-<li>sub：减</li>
-<li>mul：乘</li>
-<li>div：除</li>
-<li>mod：取余</li>
-<li>lsh：左移</li>
-<li>rsh：右移</li>
-<li>less：小于</li>
-<li>lequ：小等于</li>
-<li>big：大于</li>
-<li>bequ：大等于</li>
-<li>equ：判等</li>
-<li>iequ：判不等</li>
-<li>band：按位与</li>
-<li>bxor：按位异或</li>
-<li>bor：按位或</li>
-<li>land：逻辑与</li>
-<li>lor：逻辑或</li>
-<li>index：取下标</li>
-</ul>
-<p>而单目运算符有以下种类：</p>
-<ul>
-<li>pos：正</li>
-<li>neg：负</li>
-<li>cpl：按位取反</li>
-<li>not：逻辑非</li>
-<li>arr：组成为数列</li>
-</ul>  </body>
+<li><code>sfn port arg</code></li>
+<li><code>function identifier arg1 arg2 ...</code></li>
+<li><code>class identifier member1 member2 * member3...</code></li>
+<li><code>end</code></li>
+</ul> </div> </body>
     </html>

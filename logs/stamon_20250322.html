@@ -38,17 +38,22 @@
         </li>
         </ul>
     </nav>
-    <br><div style="margin: auto;"><h1>2024/07/07 工作日志</h1>
-<p>本次并没有提交新功能。</p>
-<h3>重构了标准库</h3>
-<p>将调用sfn的代码封装成了<code>native</code>函数，并且定义了File类的架构。</p>
+    <br><div style="margin: auto;"><h1>2025/03/22 工作日志</h1>
+<p>本次更新发行2.4.40。
+本次更新调整了依赖库和SFN机制，修复了一个致命的漏洞。</p>
+<h3>调整了依赖库和SFN机制</h3>
+<p>将依赖库接口的<code>printf</code>和<code>scanf</code>改为实现起来更为简单的<code>print</code>和<code>input</code>。现在开发者不实现格式字符串，也能移植Stamon了。
+除此之外，删除了早期测试用的，现在已经废弃的<code>printNum</code>SFN端口，并且将一些分支判断语句改为更简单明了的switch语句。</p>
+<h3>修复了一个漏洞</h3>
+<p>Stamon在初始化一个继承类时会崩溃，经调查发现是因为传参时直接将<code>Variable*</code>指针转换成<code>ClassType*</code>指针。目前该漏洞以修复。</p>
 <h3>接下来要做的事</h3>
 <ol>
+<li>将<code>TokenFileWriter</code>和<code>TokenFileReader</code>进行调试</li>
+<li>为重构虚拟机做准备工作</li>
+<li>实现分步行动机制</li>
+<li>开发Stamon的安装工具</li>
+<li>推进Stamon包管理器的开发</li>
+<li>推进斯塔蒙的开发</li>
 <li>支持文件处理库</li>
-<li>支持编译为平面字节码</li>
-<li>编写词法分析的保存功能</li>
-<li>编写AST的O1优化器</li>
-<li>完善标准库</li>
-<li>编写AST的解释器</li>
 </ol> </div> </body>
     </html>

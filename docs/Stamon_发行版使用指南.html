@@ -6,16 +6,16 @@
     <!-- 新 Bootstrap4 核心 CSS 文件 -->
     <link
         rel="stylesheet"
-        href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
+        href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
     />
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     <!-- bootstrap.bundle.min.js 用于弹窗、提示、下拉菜单，包含了 popper.min.js -->
-    <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
 
     <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
     </head>
 
     <body>
@@ -38,7 +38,7 @@
         </li>
         </ul>
     </nav>
-    <br><h1>发行版使用指南</h1>
+    <br><div style="margin: auto;"><h1>发行版使用指南</h1>
 <h5>配置运行时环境</h5>
 <p>Stamon的运行时环境非常简便，您只需要配置至少一个环境变量即可使用：</p>
 <ul>
@@ -80,8 +80,8 @@
 <p>|参数用法|功能|默认值|支持此参数的最低版本|
 |-|-|-|-|
 |--GC=&lt;boolean&gt;|是否运行GC（垃圾自动回收）|true|2.4.4|
-|--MemLimit=&lt;Integer&gt;|设置虚拟机的对象内存限制（按字节计）|默认为16,777,216字节，即16MB|2.4.4|
-|--MemPoolCache=&lt;Integer&gt;|设置内存池缓存大小（按字节计）|默认为16,777,216字节，即16MB|2.4.19|
+|--MemLimit=&lt;Integer&gt;|设置虚拟机的对象内存限制（按字节计）|默认为16,777,216字节，即16MiB|2.4.4|
+|--MemPoolCache=&lt;Integer&gt;|设置内存池缓存大小（按字节计）|默认为16,777,216字节，即16MiB|2.4.19|
 |--IgnoreWarning|忽略警告|默认只进行警告|2.4.28|
 |--JustWarn|只进行警告|默认只进行警告|2.4.28|
 |--FatalWarning|将警告作为致命错误|默认只进行警告|2.4.28|
@@ -93,5 +93,5 @@
 <p>该指令用于剥削STVC调试信息，其中src为必要参数，表示待剥削的STVC文件。</p>
 <blockquote>
 <p>——摘自<code>工作日志/20240616.md</code>，有改动</p>
-</blockquote>  </body>
+</blockquote> </div> </body>
     </html>

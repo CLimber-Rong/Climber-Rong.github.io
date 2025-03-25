@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+    <html>
+    <meta charset="utf-8" />
+    <title></title>
+
+    <!-- 新 Bootstrap4 核心 CSS 文件 -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <!-- bootstrap.bundle.min.js 用于弹窗、提示、下拉菜单，包含了 popper.min.js -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/popper.js/1.15.0/umd/popper.min.js"></script>
+
+    <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
+    <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    </head>
+
+    <body>
+    <nav class="navbar navbar-expand-sm bg-light justify-content-center">
+        <a class="navbar-brand" href="#">
+        <img src="https://CLimber-Rong.github.io/image/icon.png" alt="logo" style="width: 40px" />
+        </a>
+        <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="https://CLimber-Rong.github.io/index.html">首页</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="https://CLimber-Rong.github.io/about.html">关于</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="https://CLimber-Rong.github.io/doc.html">文档</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="https://CLimber-Rong.github.io/project.html">项目</a>
+        </li>
+        </ul>
+    </nav>
+    <br><div style="margin: auto;"><h1>抽象语法树文件编码文档</h1>
+<p>为了节约篇幅，我将用<code>AST文件</code>来作为抽象语法树文件的简称。</p>
+<h3>前言</h3>
+<p>AST文件里存储着一系列AST节点，一些应用程序可以将自己的语言解析成Stamon的AST文件格式，保存在文件，剩下编译流程交给Stamon的编译器即可。</p>
+<h3>格式</h3>
+<p>一个AST文件的编码由以下规则组成：</p>
+<ul>
+<li>每个AST文件的开头必须要有两字节的二进制码：0xABDD，此魔数用于区分于其他文件</li>
+<li>AST文件中的数值存储采用大端存储（以Python的大端存储为标准）</li>
+<li>AST标识是用于区分词法单元的数字标记，以<code>src/ast/Ast.hpp</code>当中的<code>_AstType</code>枚举为准。特别的，当AST标识为-1时，代表结尾单元</li>
+<li>每个AST单元由一字节的<strong>AST标识</strong>和若干字节的<strong>AST数据</strong>组成</li>
+<li><strong>一些AST单元只有AST标识，不含有AST数据</strong>（即一些AST单元只占一字节）</li>
+<li>一个AST节点及其子节点所组成的的标准结构是<strong>父节点单元，第一个子节点单元，第二个子节点单元，......，最后一个子节点单元，结尾单元</strong>。其中每个子节点还能再拥有子节点，因此这种结构是递归嵌套性的。</li>
+<li>任何AST单元都要拥有其对应的结尾单元，哪怕这个单元没有任何子节点单元。</li>
+</ul>
+<p>我们来特别看看拥有AST数据的AST单元（以及AST数据的构成）：</p>
+<ul>
+<li>AstIdentifierName：标识符节点，AST数据由<strong>四字节的标识符长度</strong>和<strong>字节长度为标识符长度的标识符内容</strong>组成。</li>
+<li>AstNumber：数值节点，AST数据由<strong>一字节的数值类型</strong>和<strong>若干字节的数值</strong>组成。AstNumber根据数值类型（以<code>src/ast/LeafAst.cpp</code>的_NumberType为准）又分为以下几种节点：</li>
+<li>
+<ul>
+<li>AstIntNumber：整数节点，数值由<strong>四字节的数值</strong>组成。</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>AstFloatNumber：整数节点，数值由<strong>四字节的float浮点数值</strong>组成。</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>AstDoubleNumber：整数节点，数值由<strong>八字节的float浮点数值</strong>组成。</li>
+</ul>
+</li>
+<li>AstString：字符串节点，其AST数据由<strong>四字节的字符长度</strong>和<strong>字节长度为字符串长度的字符串内容</strong>组成。</li>
+<li>AstAnonClass：匿名类节点，AST数据由<strong>一字节的布尔值（即isHaveFather）组成</strong></li>
+<li>AstExpression：表达式节点，AST数据由<strong>四字节的数值（即ass_type）组成</strong></li>
+<li>AstLeftPostfix：左值后缀节点，AST数据由<strong>四字节的数值（即postfix_type）组成</strong></li>
+<li>AstBinary：双目运算节点，AST数据由<strong>四字节的数值（即operator_type）组成</strong></li>
+<li>AstUnary：单目运算节点，AST数据由<strong>四字节的数值（即operator_type）组成</strong></li>
+<li>AstPostfix：右值后缀节点，AST数据由<strong>四字节的数值（即postfix_type）组成</strong></li>
+</ul> </div> </body>
+    </html>

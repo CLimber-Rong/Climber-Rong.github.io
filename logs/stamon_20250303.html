@@ -38,17 +38,27 @@
         </li>
         </ul>
     </nav>
-    <br><div style="margin: auto;"><h1>2024/07/07 工作日志</h1>
-<p>本次并没有提交新功能。</p>
-<h3>重构了标准库</h3>
-<p>将调用sfn的代码封装成了<code>native</code>函数，并且定义了File类的架构。</p>
+    <br><div style="margin: auto;"><h1>2025/03/03 工作日志</h1>
+<p>本次更新的内部版本为<code>2.4.38</code>。
+本次更新并不会发行<code>2.4.38</code>。
+本次更新迁移了部分文件，修复了一个不致命的错误。</p>
+<h3>迁移了AstIR的读入写入源码</h3>
+<p>将<code>STVCReader.cpp</code>改名为<code>AstIrReader.cpp</code>，并迁移至<code>src/action</code>目录下。
+将<code>STVCWriter.cpp</code>改名为<code>AstIrWriter.cpp</code>，并迁移至<code>src/action</code>目录下。</p>
+<p>相应文档对<code>STVCReader</code>和<code>STVCWriter</code>的称呼也被调整。</p>
+<p>此举动旨在为后续的STVC-TAC读入写入源码留足命名的空间。</p>
+<h3>修复了一个不致命的错误</h3>
+<p>错误位于<code>Stamon.hpp</code>。
+在初始化AST的头节点时，忘记初始化其文件名和对应行号，导致每次生成的字节码都不相同。
+尽管头节点不会报错，不影响使用，但是我还是修复了他。</p>
 <h3>接下来要做的事</h3>
 <ol>
+<li>将<code>TokenFileWriter</code>和<code>TokenFileReader</code>进行调试</li>
+<li>为重构虚拟机做准备工作</li>
+<li>实现分步行动机制</li>
+<li>开发Stamon的安装工具</li>
+<li>推进Stamon包管理器的开发</li>
+<li>推进斯塔蒙的开发</li>
 <li>支持文件处理库</li>
-<li>支持编译为平面字节码</li>
-<li>编写词法分析的保存功能</li>
-<li>编写AST的O1优化器</li>
-<li>完善标准库</li>
-<li>编写AST的解释器</li>
 </ol> </div> </body>
     </html>
